@@ -11,6 +11,7 @@ namespace AccountingNote.DBSource
 {
     public class AccountingManager
     {
+
         public static void CreateAccountingList(string user_id, string caption, int amount, int act_type, string description)
         {
             // <<<<< check input >>>>>
@@ -143,7 +144,6 @@ namespace AccountingNote.DBSource
                 Logger.WriteLog(ex);
                 return null;
             }
-
         }
         public static DataRow GetAccountingByListId(int list_id, string user_id)
         {
@@ -171,6 +171,25 @@ namespace AccountingNote.DBSource
                 return null;
             }
         }
+        public static DataRow GetAccountingDefaultInfo()
+        {
+            string connectionString = DBHealper.GetConnectionString();
+            string dbCommandString =
+                @"SELECT 
+                        COUNT(list_id) AS accounting_count, MAX(create_date) AS newest_date, MIN(create_date) AS  oldest_date
+                     FROM 
+                         accounting";
 
+            List<SqlParameter> list = new List<SqlParameter>();
+            try
+            {
+                return DBHealper.ReadDataRow(connectionString, dbCommandString, list);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+            }
+        }
     }
 }

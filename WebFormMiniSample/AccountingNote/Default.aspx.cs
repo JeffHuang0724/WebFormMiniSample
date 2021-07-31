@@ -1,5 +1,7 @@
-﻿using System;
+﻿using AccountingNote.DBSource;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -11,7 +13,30 @@ namespace AccountingNote
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            // 取得Accounting 資訊
+            DataRow drAccounting = AccountingManager.GetAccountingDefaultInfo();
+            if (drAccounting == null)
+            {
+                this.lblFirstAccountingTime.Text = "尚無資料";
+                this.lblLastAccountingTime.Text = "尚無資料";
+                this.lblAccountingCount.Text = "尚無資料";
+            } else
+            {
+                this.lblFirstAccountingTime.Text = drAccounting["oldest_date"].ToString();
+                this.lblLastAccountingTime.Text = drAccounting["newest_date"].ToString();
+                this.lblAccountingCount.Text = $"共 {drAccounting["accounting_count"].ToString()} 筆";
+            }
 
+            // 取得會員數
+            DataRow drUserCount =  UserInfoManager.GetUserCount();
+            if(drUserCount["user_count"] == null)
+            {
+                this.lblUserCount.Text = "尚無資料";
+            }else
+            {
+                this.lblUserCount.Text = $"共 {drUserCount["user_count"].ToString()} 人";
+            }
+            
         }
     }
 }

@@ -11,6 +11,22 @@ namespace AccountingNote.DBSource
 {
     public class UserInfoManager
     {
+        public static DataRow GetUserCount()
+        {
+            string connectionString = DBHealper.GetConnectionString();
+            string dbCommandString = @"SELECT COUNT(user_id) AS user_count
+                                                            FROM user_info";
+            List<SqlParameter> list = new List<SqlParameter>();
+            try
+            {
+                return DBHealper.ReadDataRow(connectionString, dbCommandString, list);
+            } catch (Exception ex)
+            {
+                Logger.WriteLog(ex);
+                return null;
+            }
+        }
+
         public static DataRow GetUserByAccount(string account)
         {
             string connectionString = DBHealper.GetConnectionString();
