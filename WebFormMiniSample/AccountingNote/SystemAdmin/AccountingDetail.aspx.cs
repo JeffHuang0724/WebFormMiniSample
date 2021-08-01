@@ -158,8 +158,10 @@ namespace AccountingNote.SystemAdmin
         protected void btnDelete_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(this.Request.QueryString["list_id"]))
+            {
                 return;
-
+            }
+                
             int listId;
             if (int.TryParse(this.Request.QueryString["list_id"], out listId))
             {

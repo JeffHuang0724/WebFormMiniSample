@@ -21,7 +21,7 @@ namespace AccountingNote.DBSource
             // <<<<< check input >>>>>
 
             string connectionString = DBHealper.GetConnectionString();
-            string queryString = @"INSERT INTO [dbo].[user_info]
+            string queryString = $@"INSERT INTO [dbo].[user_info]
                                                                (user_id
                                                                ,user_account
                                                                ,user_password
@@ -36,7 +36,7 @@ namespace AccountingNote.DBSource
                                                                ,@user_name
                                                                ,@user_email
                                                                ,@user_level
-                                                               ,@user_create_date) ";
+                                                               ,@user_create_date);";
 
             List<SqlParameter> list = new List<SqlParameter>();
             list.Add(new SqlParameter("@user_id", Guid.NewGuid()));
@@ -58,12 +58,13 @@ namespace AccountingNote.DBSource
         public static bool UpdateUserInfo(string user_id, string user_name, string user_email)
         {
             string connectionString = DBHealper.GetConnectionString();
-            string queryString = @" UPDATE [dbo].[user_info]
-                                                  SET
+            string queryString = $@" UPDATE [dbo].[user_info]
+                                                     SET
                                                                user_name = @user_name
                                                                ,user_email = @user_email
-                                                 WHERE
-                                                               user_id = @user_id ";
+                                                      WHERE
+                                                               user_id = @user_id;";
+
             List<SqlParameter> list = new List<SqlParameter>();
             list.Add(new SqlParameter("@user_id", user_id));
             list.Add(new SqlParameter("@user_name", user_name));
@@ -81,9 +82,10 @@ namespace AccountingNote.DBSource
         public static bool DeleteUserInfo(string user_id)
         {
             string connectionString = DBHealper.GetConnectionString();
-            string queryString = @"DELETE 
-                                                 FROM user_info 
-                                                 WHERE user_id = @user_id ";
+            string queryString = $@"DELETE 
+                                                    FROM user_info 
+                                                    WHERE user_id = @user_id;";
+
             List<SqlParameter> list = new List<SqlParameter>();
             list.Add(new SqlParameter("@user_id", user_id));
             try
@@ -101,8 +103,9 @@ namespace AccountingNote.DBSource
         {
             string connectionString = DBHealper.GetConnectionString();
             string dbCommandString = @"SELECT 
-                                                                COUNT(user_id) AS user_count
-                                                            FROM user_info";
+                                                            COUNT(user_id) AS user_count
+                                                            FROM user_info;";
+
             List<SqlParameter> list = new List<SqlParameter>();
             try
             {
@@ -117,7 +120,7 @@ namespace AccountingNote.DBSource
         public static DataRow GetUserByAccount(string account)
         {
             string connectionString = DBHealper.GetConnectionString();
-            string dbCommandString = @"SELECT 
+            string dbCommandString = $@"SELECT 
                                                                 user_id 
                                                                 ,user_account
                                                                 ,user_password
@@ -126,7 +129,8 @@ namespace AccountingNote.DBSource
                                                                 ,user_level
                                                                 ,user_create_date
                                                             FROM user_info
-                                                            WHERE user_account = @account";
+                                                            WHERE user_account = @account;";
+
             List<SqlParameter> list = new List<SqlParameter>();
             list.Add(new SqlParameter("@account", account));
             try
@@ -142,25 +146,24 @@ namespace AccountingNote.DBSource
         public static DataRow GetUserInfoByUserId(string user_id)
         {
             string connectionString = DBHealper.GetConnectionString();
-            string dbCommandString = @"SELECT 
+            string dbCommandString = $@"SELECT 
                                                                   user_account
                                                                  ,user_name
                                                                   ,user_email
                                                                   ,user_level
                                                                   ,user_create_date
                                                             FROM user_info
-                                                            WHERE user_id = @user_id";
+                                                            WHERE user_id = @user_id;";
 
             List<SqlParameter> list = new List<SqlParameter>();
             list.Add(new SqlParameter("@user_id", user_id));
-
             try
             {
                 return DBHealper.ReadDataRow(connectionString, dbCommandString, list);
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Logger.WriteLog(ex);
                 return null;
             }
         }
@@ -168,17 +171,15 @@ namespace AccountingNote.DBSource
         public static DataTable GetUserList()
         {
             string connectionString = DBHealper.GetConnectionString();
-            string dbCommandString =
-                $@"SELECT
-                            user_id
-                            ,user_account
-                            ,user_name
-                            ,user_email
-                            ,user_level
-                            ,user_create_date
-                        FROM user_info
-                        ORDER BY user_create_date DESC
-                ";
+            string dbCommandString = $@"SELECT
+                                                                    user_id
+                                                                    ,user_account
+                                                                    ,user_name
+                                                                    ,user_email
+                                                                    ,user_level
+                                                                    ,user_create_date
+                                                               FROM user_info
+                                                               ORDER BY user_create_date DESC;";
 
             List<SqlParameter> list = new List<SqlParameter>();
             try
@@ -195,10 +196,10 @@ namespace AccountingNote.DBSource
         public static DataRow GetUserPassword(string user_id)
         {
             string connectionString = DBHealper.GetConnectionString();
-            string dbCommandString = @"SELECT 
-                                                                user_password
-                                                            FROM user_info
-                                                            WHERE user_id = @user_id";
+            string dbCommandString = $@"SELECT 
+                                                                    user_password
+                                                                FROM user_info
+                                                                WHERE user_id = @user_id;";
 
             List<SqlParameter> list = new List<SqlParameter>();
             list.Add(new SqlParameter("@user_id", user_id));
@@ -209,7 +210,7 @@ namespace AccountingNote.DBSource
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Logger.WriteLog(ex);
                 return null;
             }
         }
@@ -217,11 +218,12 @@ namespace AccountingNote.DBSource
         public static bool UpdateUserPwd(string user_id, string user_password)
         {
             string connectionString = DBHealper.GetConnectionString();
-            string queryString = @" UPDATE [dbo].[user_info]
-                                                  SET
+            string queryString = $@" UPDATE [dbo].[user_info]
+                                                    SET
                                                                user_password = @user_password
-                                                 WHERE
-                                                               user_id = @user_id ";
+                                                    WHERE
+                                                               user_id = @user_id;";
+
             List<SqlParameter> list = new List<SqlParameter>();
             list.Add(new SqlParameter("@user_id", user_id));
             list.Add(new SqlParameter("@user_password", user_password));

@@ -25,7 +25,7 @@ namespace AccountingNote.DBSource
             // <<<<< check input >>>>>
 
             string connectionString = DBHealper.GetConnectionString();
-            string queryString = @"INSERT INTO [dbo].[accounting]
+            string queryString = $@"INSERT INTO [dbo].[accounting]
                                                                (user_id
                                                                ,caption
                                                                ,amount
@@ -38,7 +38,7 @@ namespace AccountingNote.DBSource
                                                                ,@amount
                                                                ,@act_type
                                                                ,@create_date
-                                                               ,@description) ";
+                                                               ,@description); ";
 
             List<SqlParameter> list = new List<SqlParameter>();
             list.Add(new SqlParameter("@user_id", user_id));
@@ -70,7 +70,7 @@ namespace AccountingNote.DBSource
             // <<<<< check input >>>>>
 
             string connectionString = DBHealper.GetConnectionString();
-            string queryString = @" UPDATE [dbo].[accounting]
+            string queryString = $@" UPDATE [dbo].[accounting]
                                                   SET
                                                                user_id = @user_id
                                                                ,caption = @caption
@@ -79,7 +79,7 @@ namespace AccountingNote.DBSource
                                                                ,create_date = @create_date
                                                                ,description = @description
                                                  WHERE
-                                                               list_id = @list_id ";
+                                                               list_id = @list_id;";
             List<SqlParameter> list = new List<SqlParameter>();
             list.Add(new SqlParameter("@list_id", list_id));
             list.Add(new SqlParameter("@user_id", user_id));
@@ -101,9 +101,9 @@ namespace AccountingNote.DBSource
         public static bool DeleteAccountingByListId(string list_id)
         {
             string connectionString = DBHealper.GetConnectionString();
-            string queryString = @"DELETE 
+            string queryString = $@"DELETE 
                                                  FROM accounting 
-                                                 WHERE list_id = @list_id ";
+                                                 WHERE list_id = @list_id;";
             List<SqlParameter> list = new List<SqlParameter>();
             list.Add(new SqlParameter("@list_id", list_id));
 
@@ -120,17 +120,15 @@ namespace AccountingNote.DBSource
         public static DataTable GetAccountingList(string userId)
         {
             string connectionString = DBHealper.GetConnectionString();
-            string dbCommandString =
-                $@" SELECT 
-                            list_id
-                          ,caption
-                          ,amount
-                          ,act_type
-                          ,create_date
-                       FROM accounting
-                       WHERE user_id = @userId
-                        ORDER BY create_date DESC
-                ";
+            string dbCommandString = $@"SELECT 
+                                                                  list_id
+                                                                  ,caption
+                                                                  ,amount
+                                                                  ,act_type
+                                                                  ,create_date
+                                                              FROM accounting
+                                                              WHERE user_id = @userId
+                                                              ORDER BY create_date DESC;";
 
             List<SqlParameter> list = new List<SqlParameter>();
             list.Add(new SqlParameter("@userId", userId));
@@ -148,14 +146,14 @@ namespace AccountingNote.DBSource
         public static DataRow GetAccountingByListId(int list_id, string user_id)
         {
             string connectionString = DBHealper.GetConnectionString();
-            string dbCommandString = @"SELECT 
+            string dbCommandString = $@"SELECT 
                                                                   caption
                                                                  ,amount
                                                                   ,act_type
                                                                   ,create_date
                                                                   ,description
-                                                            FROM accounting
-                                                            WHERE list_id = @list_id AND user_id = @user_id";
+                                                                FROM accounting
+                                                                WHERE list_id = @list_id AND user_id = @user_id;";
 
             List<SqlParameter> list = new List<SqlParameter>();
             list.Add(new SqlParameter("@list_id", list_id));
@@ -174,11 +172,9 @@ namespace AccountingNote.DBSource
         public static DataRow GetAccountingDefaultInfo()
         {
             string connectionString = DBHealper.GetConnectionString();
-            string dbCommandString =
-                @"SELECT 
-                        COUNT(list_id) AS accounting_count, MAX(create_date) AS newest_date, MIN(create_date) AS  oldest_date
-                     FROM 
-                         accounting";
+            string dbCommandString = $@"SELECT 
+                                                                    COUNT(list_id) AS accounting_count, MAX(create_date) AS newest_date, MIN(create_date) AS  oldest_date
+                                                               FROM  accounting;";
 
             List<SqlParameter> list = new List<SqlParameter>();
             try
@@ -194,12 +190,10 @@ namespace AccountingNote.DBSource
         public static DataRow GetAccountingAddAmount(string userId)
         {
             string connectionString = DBHealper.GetConnectionString();
-            string dbCommandString =
-                $@" SELECT 
-                       SUM(amount) AS 'accounting_add_amount'
-                       FROM accounting
-                       WHERE act_type = '1' AND user_id = @userId
-                ";
+            string dbCommandString =  $@" SELECT 
+                                                                    SUM(amount) AS 'accounting_add_amount'
+                                                                 FROM accounting
+                                                                 WHERE act_type = '1' AND user_id = @userId;";
 
             List<SqlParameter> list = new List<SqlParameter>();
             list.Add(new SqlParameter("@userId", userId));
@@ -217,12 +211,10 @@ namespace AccountingNote.DBSource
         public static DataRow GetAccountingMinusAmount(string userId)
         {
             string connectionString = DBHealper.GetConnectionString();
-            string dbCommandString =
-                $@" SELECT 
-                       SUM(amount) AS 'accounting_minus_amount'
-                       FROM accounting
-                       WHERE act_type = '0' AND user_id = @userId
-                ";
+            string dbCommandString = $@" SELECT 
+                                                                   SUM(amount) AS 'accounting_minus_amount'
+                                                                FROM accounting
+                                                                WHERE act_type = '0' AND user_id = @userId;";
 
             List<SqlParameter> list = new List<SqlParameter>();
             list.Add(new SqlParameter("@userId", userId));
