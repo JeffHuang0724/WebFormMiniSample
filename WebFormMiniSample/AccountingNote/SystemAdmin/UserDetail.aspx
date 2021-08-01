@@ -19,7 +19,7 @@
             </table>
         </div>
         <div style="width: 100%; height: 100%; display: flex; flex-flow: column; align-items: center; justify-content: center; text-align: center">
-            <table width="100%" border="1">
+            <table width="100%">
                 <tr>
                     <td width="15%">
                         <div style="float: left; margin-left: 3rem;">

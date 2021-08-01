@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Windows.Forms;
 
 namespace AccountingNote.SystemAdmin
 {
@@ -64,39 +65,47 @@ namespace AccountingNote.SystemAdmin
 
         protected void btnSave_Click(object sender, EventArgs e)
         {
-
-            string oldPwd = this.txtOldPwd.Text;
-            string oldCommitPwd = this.txtOldCommitPwd.Text;
-
-            if (string.Compare(oldPwd, oldCommitPwd) != 0)
+            var alert1 = MessageBox.Show("你確定要變更密碼?", "訊息提示",
+                                         MessageBoxButtons.YesNo,
+                                         MessageBoxIcon.Warning);
+            if (alert1 == DialogResult.No)
             {
-                ltMsg.Text = "密碼不一致，請重新確認";
                 return;
             }
-            else
+
+            List<string> msgList = new List<string>();
+            if (!this.CheckInput(out msgList))
             {
-                List<string> msgList = new List<string>();
-                if (!this.CheckInput(out msgList))
-                {
-                    this.ltMsg.Text = string.Join("<br />", msgList);
-                    return;
-                }
+                this.ltMsg.Text = string.Join("<br />", msgList);
+                return;
+            }
 
-                UserInfoModel currentUser = AuthManager.GetCurentUser();
-                if (currentUser == null)
-                {
-                    Response.Redirect("/Login.aspx");
-                    return;
-                }
+            UserInfoModel currentUser = AuthManager.GetCurentUser();
+            if (currentUser == null)
+            {
+                Response.Redirect("/Login.aspx");
+                return;
+            }
 
-                string userIdTxt = this.Request.QueryString["user_id"];
-                if (UserInfoManager.UpdateUserPwd(userIdTxt, this.txtNewPwd.Text))
+            string userIdTxt = this.Request.QueryString["user_id"];
+            if (UserInfoManager.UpdateUserPwd(userIdTxt, this.txtNewPwd.Text))
+            {
+                var alertSuccess = MessageBox.Show("更新成功", "訊息提示",
+                                         MessageBoxButtons.OK,
+                                         MessageBoxIcon.Information);
+                if (alertSuccess == DialogResult.OK)
                 {
                     Response.Redirect($"/SystemAdmin/UserDetail.aspx?user_id={this.Request.QueryString["user_id"]}");
                 }
-                else
+            }
+            else
+            {
+                var alertFailed = MessageBox.Show("更新失敗", "訊息提示",
+                                         MessageBoxButtons.OK,
+                                         MessageBoxIcon.Information);
+                if (alertFailed == DialogResult.OK)
                 {
-                    ltMsg.Text = "更新失敗";
+                    return;
                 }
             }
         }
@@ -104,7 +113,7 @@ namespace AccountingNote.SystemAdmin
         private bool CheckInput(out List<string> errMsgList)
         {
             List<string> msgList = new List<string>();
-            if(string.IsNullOrWhiteSpace(txtOldPwd.Text) || string.IsNullOrWhiteSpace(txtOldCommitPwd.Text) || string.IsNullOrWhiteSpace(txtNewPwd.Text))
+            if (string.IsNullOrWhiteSpace(txtOldPwd.Text) || string.IsNullOrWhiteSpace(txtOldCommitPwd.Text) || string.IsNullOrWhiteSpace(txtNewPwd.Text))
             {
                 msgList.Add("密碼不得為空，請重新確認");
             }

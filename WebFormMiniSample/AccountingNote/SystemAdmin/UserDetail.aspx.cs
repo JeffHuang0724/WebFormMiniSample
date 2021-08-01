@@ -34,6 +34,7 @@ namespace AccountingNote.SystemAdmin
                 if (this.Request.QueryString["user_id"] == null)
                 {
                     this.btnDelete.Visible = false;
+                    this.btnChangePwd.Visible = false;
                     // 新增模式等級限制 為一般會員
                     this.ddlUserLevel.SelectedValue = "1";
                     this.ddlUserLevel.Enabled = false;
@@ -42,6 +43,7 @@ namespace AccountingNote.SystemAdmin
                 else
                 {
                     this.btnDelete.Visible = true;
+                    this.btnChangePwd.Visible = true;
                     string userIdTxt = this.Request.QueryString["user_id"];
 
                     //確認登入者是否為本人或是管理員
