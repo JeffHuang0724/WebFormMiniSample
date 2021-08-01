@@ -23,7 +23,7 @@
         </div>
         <asp:PlaceHolder ID="plcLogin" runat="server" Visible="true">
             <div style="width: 100%; height: 100%; display: flex; flex-flow: column; align-items: center; justify-content: center; text-align: center; margin-top:1rem">
-                <table style="line-height:2rem;"">
+                <table style="line-height:2rem;">
                     <tr>
                         <td>
                             Account:

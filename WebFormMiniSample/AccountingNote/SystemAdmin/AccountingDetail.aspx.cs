@@ -73,7 +73,7 @@ namespace AccountingNote.SystemAdmin
         protected void btnSave_Click(object sender, EventArgs e)
         {
             List<string> msgList = new List<string>();
-            if (!this.CheckInpu(out msgList))
+            if (!this.CheckInput(out msgList))
             {
                 this.ltMsg.Text = string.Join("<br />", msgList);
                 return;
@@ -117,7 +117,7 @@ namespace AccountingNote.SystemAdmin
             }
         }
 
-        private bool CheckInpu(out List<string> errMsgList)
+        private bool CheckInput(out List<string> errMsgList)
         {
             List<string> msgList = new List<string>();
             // chk ActType

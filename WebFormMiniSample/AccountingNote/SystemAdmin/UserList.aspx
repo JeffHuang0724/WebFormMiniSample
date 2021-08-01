@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="AccountingList.aspx.cs" Inherits="AccountingNote.SystemAdmin.AccountingList" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="UserList.aspx.cs" Inherits="AccountingNote.SystemAdmin.UserList" %>
 
 <!DOCTYPE html>
 
@@ -37,7 +37,7 @@
                             <tr>
                                 <td>
                                     <div style="text-align: left">
-                                        <h1 style="margin-left: 15rem">流水帳管理</h1>
+                                        <h1 style="margin-left: 15rem">會員管理</h1>
                                     </div>
                                 </td>
                             </tr>
@@ -45,8 +45,6 @@
                                 <td>
                                     <div style="float: left; margin-left: 15rem;">
                                         <asp:Button ID="btnCreate" runat="server" OnClick="btnCreate_Click" Text="Add " />
-                                        <asp:Label runat="server" ID="lblAmount" Text="共 100 元" Style="margin-left: 10rem" Visible="true">
-                                        </asp:Label>
                                     </div>
                                 </td>
                             </tr>
@@ -54,24 +52,21 @@
                                 <td>
                                     <div style="float: left; margin-top: 1.5rem; margin-left: 15rem;">
                                         <!-- Main -->
-                                        <asp:GridView ID="gvAccountingList" runat="server" AutoGenerateColumns="false" OnRowDataBound="gvAccountingList_RowDataBound">
+                                        <asp:GridView ID="gvUserList" runat="server" AutoGenerateColumns="false" OnRowDataBound="gvUserList_RowDataBound">
                                             <Columns>
-                                                <asp:BoundField HeaderText="標題" DataField="caption" />
-                                                <asp:TemplateField HeaderText="金額">
+                                                <asp:BoundField HeaderText="帳號" DataField="user_account" />
+                                                <asp:BoundField HeaderText="姓名" DataField="user_name" />
+                                                <asp:BoundField HeaderText="Email" DataField="user_email" />
+                                                <asp:TemplateField HeaderText="等級">
                                                     <ItemTemplate>
-                                                        <asp:Label runat="server" ID="lblAmount"></asp:Label>
+                                                        <!--  <%# ((int)Eval("user_level") == 0) ? "管理員" : "一般會員" %> -->
+                                                        <asp:Literal runat="server" ID="ltUserLevel"></asp:Literal>
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
-                                                <asp:TemplateField HeaderText="IN / OUT">
-                                                    <ItemTemplate>
-                                                        <!--  <%# ((int)Eval("act_type") == 0) ? "支出" : "收入" %> -->
-                                                        <asp:Literal runat="server" ID="ltActType"></asp:Literal>
-                                                    </ItemTemplate>
-                                                </asp:TemplateField>
-                                                <asp:BoundField HeaderText="建立日期" DataField="create_date" DataFormatString="{0:yyyy-MM-dd}" />
+                                                <asp:BoundField HeaderText="建立日期" DataField="user_create_date" DataFormatString="{0:yyyy-MM-dd}" />
                                                 <asp:TemplateField HeaderText="Act">
                                                     <ItemTemplate>
-                                                        <a href="/SystemAdmin/AccountingDetail.aspx?list_id=<%# Eval("list_id") %>">Edit</a>
+                                                        <a href="/SystemAdmin/UserDetail.aspx?user_id=<%# Eval("user_id") %>">Edit</a>
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
                                             </Columns>

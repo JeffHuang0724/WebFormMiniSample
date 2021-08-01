@@ -1,10 +1,10 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="AccountingDetail.aspx.cs" Inherits="AccountingNote.SystemAdmin.AccountingDetail" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="UserPassword.aspx.cs" Inherits="AccountingNote.SystemAdmin.UserPassword" %>
 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>毛豆端火鍋組 - 流水帳管理系統</title>
 </head>
 <body>
@@ -19,10 +19,10 @@
             </table>
         </div>
         <div style="width: 100%; height: 100%; display: flex; flex-flow: column; align-items: center; justify-content: center; text-align: center">
-            <table width="100%">
+            <table width="100%" border="1">
                 <tr>
                     <td width="15%">
-                        <div>
+                        <div style="float: left; margin-left: 3rem;">
                             <a href="UserInfo.aspx">使用者資訊</a>
                             <br />
                             <br />
@@ -34,58 +34,54 @@
                     </td>
                     <td width="85%">
                         <div style="text-align: left; margin-left: 15rem;">
-                            <h1>流水帳管理</h1>
+                            <h1>會員管理</h1>
                         </div>
                         <div style="float: left; margin-top: 1.5rem; margin-left: 15rem;">
                             <table>
                                 <tr>
                                     <td>
-                                        <div style="float: left; ">Type: </div>
+                                        <div style="float: left; ">帳號: </div>
                                     </td>
                                     <td>
                                         <div style="float: left; margin-left: 1rem;">
-                                            <asp:DropDownList ID="ddlActType" runat="server">
-                                                <asp:ListItem Value="0">支出</asp:ListItem>
-                                                <asp:ListItem Value="1">收入</asp:ListItem>
-                                            </asp:DropDownList>
+                                            <asp:Label runat="server" ID="lblUserAccount"></asp:Label>
                                         </div>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <div style="float: left; margin-top:1rem">Amount:</div>
+                                        <div style="float: left; margin-top:1rem">原密碼:</div>
                                     </td>
                                     <td>
                                         <div style="float: left; margin-left: 1rem;margin-top:1rem;">
-                                            <asp:TextBox ID="txtAmount" runat="server" TextMode="Number"></asp:TextBox>
+                                            <asp:TextBox ID="txtOldPwd" runat="server" TextMode="Password"></asp:TextBox>
                                         </div>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <div style="float: left;margin-top:1rem;">Caption:</div>
+                                        <div style="float: left;margin-top:1rem;">確認密碼:</div>
                                     </td>
                                     <td>
                                         <div style="float: left; margin-left: 1rem;margin-top:1rem;">
-                                            <asp:TextBox ID="txtCaption" runat="server"></asp:TextBox>
+                                            <asp:TextBox ID="txtOldCommitPwd" runat="server" TextMode="Password"></asp:TextBox>
                                         </div>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <div style="float: left;margin-top:1rem;">Desc:</div>
+                                        <div style="float: left;margin-top:1rem;">新密碼:</div>
                                     </td>
                                     <td>
                                         <div style="float: left; margin-left: 1rem;margin-top:1rem;">
-                                            <asp:TextBox ID="txtDesc" runat="server" TextMode="MultiLine"></asp:TextBox>
+                                            <asp:TextBox ID="txtNewPwd" runat="server" TextMode="Password"></asp:TextBox>
                                         </div>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td colspan="2">
                                         <div style="float: left; ">
-                                            <asp:Button ID="btnSave" runat="server" OnClick="btnSave_Click" Text="Save" Style="margin-top: 1rem; margin-right: 2.5rem" />
-                                            <asp:Button ID="btnDelete" runat="server" OnClick="btnDelete_Click" Text="Delete" Visible="false" Style="margin-top: 1rem;" />
+                                            <asp:Button runat="server" ID="btnSave" OnClick="btnSave_Click" Text="變更密碼" Style="margin-top: 1rem;" />
                                         </div>
                                     </td>
                                 </tr>

@@ -11,7 +11,6 @@ namespace AccountingNote.DBSource
 {
     public class AccountingManager
     {
-
         public static void CreateAccountingList(string user_id, string caption, int amount, int act_type, string description)
         {
             // <<<<< check input >>>>>
@@ -130,6 +129,7 @@ namespace AccountingNote.DBSource
                           ,create_date
                        FROM accounting
                        WHERE user_id = @userId
+                        ORDER BY create_date DESC
                 ";
 
             List<SqlParameter> list = new List<SqlParameter>();
@@ -181,6 +181,52 @@ namespace AccountingNote.DBSource
                          accounting";
 
             List<SqlParameter> list = new List<SqlParameter>();
+            try
+            {
+                return DBHealper.ReadDataRow(connectionString, dbCommandString, list);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+            }
+        }
+        public static DataRow GetAccountingAddAmount(string userId)
+        {
+            string connectionString = DBHealper.GetConnectionString();
+            string dbCommandString =
+                $@" SELECT 
+                       SUM(amount) AS 'accounting_add_amount'
+                       FROM accounting
+                       WHERE act_type = '1' AND user_id = @userId
+                ";
+
+            List<SqlParameter> list = new List<SqlParameter>();
+            list.Add(new SqlParameter("@userId", userId));
+
+            try
+            {
+                return DBHealper.ReadDataRow(connectionString, dbCommandString, list);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+            }
+        }
+        public static DataRow GetAccountingMinusAmount(string userId)
+        {
+            string connectionString = DBHealper.GetConnectionString();
+            string dbCommandString =
+                $@" SELECT 
+                       SUM(amount) AS 'accounting_minus_amount'
+                       FROM accounting
+                       WHERE act_type = '0' AND user_id = @userId
+                ";
+
+            List<SqlParameter> list = new List<SqlParameter>();
+            list.Add(new SqlParameter("@userId", userId));
+
             try
             {
                 return DBHealper.ReadDataRow(connectionString, dbCommandString, list);

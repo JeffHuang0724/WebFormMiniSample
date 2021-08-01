@@ -23,7 +23,6 @@ namespace AccountingNote.DBSource
                 System.IO.File.Create(logPath);
 
             System.IO.File.AppendAllText(logPath, msg);
-            throw ex;
         }
     }
 }

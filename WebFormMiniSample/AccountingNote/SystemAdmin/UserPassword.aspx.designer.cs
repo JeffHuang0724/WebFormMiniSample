@@ -11,7 +11,7 @@ namespace AccountingNote.SystemAdmin
 {
 
 
-    public partial class AccountingList
+    public partial class UserPassword
     {
 
         /// <summary>
@@ -24,39 +24,57 @@ namespace AccountingNote.SystemAdmin
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
-        /// btnCreate 控制項。
+        /// lblUserAccount 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCreate;
+        protected global::System.Web.UI.WebControls.Label lblUserAccount;
 
         /// <summary>
-        /// lblAmount 控制項。
+        /// txtOldPwd 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblAmount;
+        protected global::System.Web.UI.WebControls.TextBox txtOldPwd;
 
         /// <summary>
-        /// gvAccountingList 控制項。
+        /// txtOldCommitPwd 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvAccountingList;
+        protected global::System.Web.UI.WebControls.TextBox txtOldCommitPwd;
 
         /// <summary>
-        /// plcNoData 控制項。
+        /// txtNewPwd 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.PlaceHolder plcNoData;
+        protected global::System.Web.UI.WebControls.TextBox txtNewPwd;
+
+        /// <summary>
+        /// btnSave 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSave;
+
+        /// <summary>
+        /// ltMsg 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal ltMsg;
     }
 }

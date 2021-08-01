@@ -34,10 +34,41 @@ namespace AccountingNote.SystemAdmin
             var dt = AccountingManager.GetAccountingList(currentUser.user_id);
             if(dt.Rows.Count > 0)
             {
+                // 取得收入總數
+                int accountingAddAmount;
+                var drAccAdd = AccountingManager.GetAccountingAddAmount(currentUser.user_id);
+                if(drAccAdd != null)
+                {
+                    
+                    if (!int.TryParse(drAccAdd["accounting_add_amount"].ToString(), out accountingAddAmount))
+                    {
+                        accountingAddAmount = 0;
+                    }
+                } else
+                {
+                    accountingAddAmount = 0;
+                }
+
+                // 取得支出總數
+                int accountingMinAmount;
+                var drAccMin = AccountingManager.GetAccountingMinusAmount(currentUser.user_id);
+                if (drAccMin != null)
+                {
+                    if (!int.TryParse(drAccMin["accounting_minus_amount"].ToString(), out accountingMinAmount))
+                    {
+                        accountingMinAmount = 0;
+                    }
+                } else
+                {
+                    accountingMinAmount = 0;
+                }
+                
+                this.lblAmount.Text = $"小計 {(accountingAddAmount - accountingMinAmount).ToString()} 元";
                 this.gvAccountingList.DataSource = dt;
                 this.gvAccountingList.DataBind();
             } else
             {
+                this.lblAmount.Visible = false;
                 this.gvAccountingList.Visible = false;
                 this.plcNoData.Visible = true;
             }
@@ -75,7 +106,6 @@ namespace AccountingNote.SystemAdmin
                     lbl.ForeColor = Color.Red;
                 }
             }
-           
         }
     }
 }
