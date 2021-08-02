@@ -1,5 +1,8 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="UserList.aspx.cs" Inherits="AccountingNote.SystemAdmin.UserList" %>
 
+<%@ Register Src="~/UserControls/ucPager.ascx" TagPrefix="uc1" TagName="ucPager" %>
+
+
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -52,25 +55,35 @@
                                 <td>
                                     <div style="float: left; margin-top: 1.5rem; margin-left: 15rem;">
                                         <!-- Main -->
-                                        <asp:GridView ID="gvUserList" runat="server" AutoGenerateColumns="false" OnRowDataBound="gvUserList_RowDataBound">
+                                        <asp:GridView ID="gvUserList" runat="server" AutoGenerateColumns="False" OnRowDataBound="gvUserList_RowDataBound" CellPadding="10" ForeColor="#333333" GridLines="Both">
+                                            <AlternatingRowStyle BackColor="White" />
                                             <Columns>
                                                 <asp:BoundField HeaderText="帳號" DataField="Account" />
                                                 <asp:BoundField HeaderText="姓名" DataField="Name" />
                                                 <asp:BoundField HeaderText="Email" DataField="Email" />
                                                 <asp:TemplateField HeaderText="等級">
                                                     <ItemTemplate>
-                                                        <!--  <%# ((int)Eval("UserLevel") == 0) ? "管理員" : "一般會員" %> -->
                                                         <asp:Literal runat="server" ID="ltUserLevel"></asp:Literal>
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
                                                 <asp:BoundField HeaderText="建立日期" DataField="CreateDate" DataFormatString="{0:yyyy-MM-dd}" />
                                                 <asp:TemplateField HeaderText="Act">
                                                     <ItemTemplate>
-                                                        <a href="/SystemAdmin/UserDetail.aspx?user_id=<%# Eval("ID") %>">Edit</a>
+                                                        <a href="/SystemAdmin/UserDetail.aspx?UID=<%# Eval("ID") %>">Edit</a>
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
                                             </Columns>
+                                            <FooterStyle BackColor="#990000" Font-Bold="True" ForeColor="White" />
+                                            <HeaderStyle BackColor="#990000" Font-Bold="True" ForeColor="White" />
+                                            <PagerStyle BackColor="#FFCC66" ForeColor="#333333" HorizontalAlign="Center" />
+                                            <RowStyle BackColor="#FFFBD6" ForeColor="#333333" />
+                                            <SelectedRowStyle BackColor="#FFCC66" Font-Bold="True" ForeColor="Navy" />
+                                            <SortedAscendingCellStyle BackColor="#FDF5AC" />
+                                            <SortedAscendingHeaderStyle BackColor="#4D0000" />
+                                            <SortedDescendingCellStyle BackColor="#FCF6C0" />
+                                            <SortedDescendingHeaderStyle BackColor="#820000" />
                                         </asp:GridView>
+                                        <uc1:ucPager runat="server" ID="ucPager" PageSize="5" CurrentPage="1" TotalSize="5" Url="UserList.aspx"  />
                                         <asp:PlaceHolder ID="plcNoData" runat="server" Visible="false">
                                             <p style="color: red; background-color: cornflowerblue">
                                                 No data in your Accounting Note.

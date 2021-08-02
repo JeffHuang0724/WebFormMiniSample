@@ -11,7 +11,7 @@ namespace AccountingNote.DBSource
 {
     public class UserInfoManager
     {
-        public static void CreateUserInfo(string user_account, string user_password, string user_name, string user_email, int user_level)
+        public static void CreateUserInfo(string user_account, string user_name, string user_email, int user_level)
         {
             // <<<<< check input >>>>>
             if (user_level < 0 || user_level > 1)
@@ -41,7 +41,8 @@ namespace AccountingNote.DBSource
             List<SqlParameter> list = new List<SqlParameter>();
             list.Add(new SqlParameter("@user_id", Guid.NewGuid()));
             list.Add(new SqlParameter("@user_account", user_account));
-            list.Add(new SqlParameter("@user_password", user_password));
+            //密碼預設為12345
+            list.Add(new SqlParameter("@user_password", "12345"));
             list.Add(new SqlParameter("@user_name", user_name));
             list.Add(new SqlParameter("@user_email", user_email));
             list.Add(new SqlParameter("@user_level", user_level));

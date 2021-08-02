@@ -31,14 +31,14 @@ namespace AccountingNote.SystemAdmin
 
             if (!this.IsPostBack)
             {
-                if (this.Request.QueryString["user_id"] == null)
+                if (this.Request.QueryString["UID"] == null)
                 {
                     Response.Redirect("/SystemAdmin/UserList.aspx");
                 }
                 else
                 {
 
-                    string userIdTxt = this.Request.QueryString["user_id"];
+                    string userIdTxt = this.Request.QueryString["UID"];
 
 
                     //確認登入者是否為本人或是管理員
@@ -87,7 +87,7 @@ namespace AccountingNote.SystemAdmin
                 return;
             }
 
-            string userIdTxt = this.Request.QueryString["user_id"];
+            string userIdTxt = this.Request.QueryString["UID"];
             if (UserInfoManager.UpdateUserPwd(userIdTxt, this.txtNewPwd.Text))
             {
                 var alertSuccess = MessageBox.Show("更新成功", "訊息提示",
@@ -95,7 +95,7 @@ namespace AccountingNote.SystemAdmin
                                          MessageBoxIcon.Information);
                 if (alertSuccess == DialogResult.OK)
                 {
-                    Response.Redirect($"/SystemAdmin/UserDetail.aspx?user_id={this.Request.QueryString["user_id"]}");
+                    Response.Redirect($"/SystemAdmin/UserDetail.aspx?UID={this.Request.QueryString["UID"]}");
                 }
             }
             else
@@ -125,7 +125,7 @@ namespace AccountingNote.SystemAdmin
             else
             {
                 // 確認與資料庫密碼是否相符
-                var userDr = UserInfoManager.GetUserPassword(this.Request.QueryString["user_id"]);
+                var userDr = UserInfoManager.GetUserPassword(this.Request.QueryString["UID"]);
                 if (String.Compare(userDr["PWD"].ToString(), this.txtOldPwd.Text) != 0)
                 {
                     msgList.Add("密碼不符，請重新確認");
@@ -146,7 +146,6 @@ namespace AccountingNote.SystemAdmin
             {
                 return false;
             }
-
         }
     }
 }

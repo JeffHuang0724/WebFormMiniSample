@@ -33,13 +33,62 @@ namespace AccountingNote.SystemAdmin
             var dt = UserInfoManager.GetUserList();
             if (dt.Rows.Count > 0)
             {
+                var dtPaged = this.GetPageDataTable(dt);
+
+                this.gvUserList.DataSource = dtPaged;
+                this.gvUserList.DataBind();
+
+                this.ucPager.TotalSize = dt.Rows.Count;
+                this.ucPager.Bind();
+                /*
                 this.gvUserList.DataSource = dt;
                 this.gvUserList.DataBind();
+                */
             } else
             {
                 this.gvUserList.Visible = false;
                 this.plcNoData.Visible = true;
             }
+        }
+
+        private int GetCurrentPage()
+        {
+            string pageText = Request.QueryString["Page"];
+
+            if (string.IsNullOrWhiteSpace(pageText))
+                return 1;
+
+            int intPage;
+            if (!int.TryParse(pageText, out intPage))
+                return 1;
+
+            if (intPage <= 0)
+                return 1;
+
+            return intPage;
+        }
+
+        private DataTable GetPageDataTable(DataTable dt)
+        {
+            DataTable dtPaged = dt.Clone();
+
+            int startIndex = (this.GetCurrentPage() - 1) * 5;
+            int endIndex = (this.GetCurrentPage()) * 5;
+
+            if (endIndex > dt.Rows.Count)
+                endIndex = dt.Rows.Count;
+
+            for (var i = startIndex; i < endIndex; i++)
+            {
+                DataRow dr = dt.Rows[i];
+                var drNew = dtPaged.NewRow();
+                foreach (DataColumn dc in dt.Columns)
+                {
+                    drNew[dc.ColumnName] = dr[dc];
+                }
+                dtPaged.Rows.Add(drNew);
+            }
+            return dtPaged;
         }
 
         protected void btnCreate_Click(object sender, EventArgs e)

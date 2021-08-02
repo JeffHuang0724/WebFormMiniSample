@@ -34,6 +34,17 @@ namespace AccountingNote.SystemAdmin
             var dt = AccountingManager.GetAccountingList(currentUser.user_id);
             if(dt.Rows.Count > 0)
             {
+                // 20210802 控制項
+                var dtPaged = this.GetPageDataTable(dt);
+
+                this.gvAccountingList.DataSource = dtPaged;
+                this.gvAccountingList.DataBind();
+
+                this.ucPager.TotalSize = dt.Rows.Count;
+                this.ucPager.Bind();
+                // 20210802
+
+
                 // 取得收入總數
                 int accountingAddAmount;
                 var drAccAdd = AccountingManager.GetAccountingAddAmount(currentUser.user_id);
@@ -64,8 +75,12 @@ namespace AccountingNote.SystemAdmin
                 }
                 
                 this.lblAmount.Text = $"小計 {(accountingAddAmount - accountingMinAmount).ToString()} 元";
+                // 20210802
+                /*
                 this.gvAccountingList.DataSource = dt;
                 this.gvAccountingList.DataBind();
+                */
+                //20210802
             } else
             {
                 this.lblAmount.Visible = false;
@@ -74,6 +89,48 @@ namespace AccountingNote.SystemAdmin
             }
 
         }
+
+        //20210802
+        private int GetCurrentPage()
+        {
+            string pageText = Request.QueryString["Page"];
+
+            if (string.IsNullOrWhiteSpace(pageText))
+                return 1;
+
+            int intPage;
+            if (!int.TryParse(pageText, out intPage))
+                return 1;
+
+            if (intPage <= 0)
+                return 1;
+
+            return intPage;
+        }
+
+        private DataTable GetPageDataTable (DataTable dt)
+        {
+            DataTable dtPaged = dt.Clone();
+           
+            int startIndex = (this.GetCurrentPage() - 1) * 10;
+            int endIndex = (this.GetCurrentPage()) * 10;
+
+            if (endIndex > dt.Rows.Count)
+                endIndex = dt.Rows.Count;
+
+            for (var i = startIndex; i < endIndex; i++)
+            {
+                DataRow dr = dt.Rows[i];
+                var drNew = dtPaged.NewRow();
+                foreach (DataColumn dc in dt.Columns)
+                {
+                    drNew[dc.ColumnName] = dr[dc];
+                }
+                dtPaged.Rows.Add(drNew);
+            }
+            return dtPaged;
+        }
+        //20210802
 
         protected void btnCreate_Click(object sender, EventArgs e)
         {

@@ -32,7 +32,7 @@ namespace AccountingNote.SystemAdmin
             if (!this.IsPostBack)
             {
                 // 新增模式
-                if (this.Request.QueryString["list_id"] == null)
+                if (this.Request.QueryString["ID"] == null)
                 {
                     this.btnDelete.Visible = false;
                 }
@@ -41,7 +41,7 @@ namespace AccountingNote.SystemAdmin
                 {
                     this.btnDelete.Visible = true;
 
-                    string listIdTxt = this.Request.QueryString["list_id"];
+                    string listIdTxt = this.Request.QueryString["ID"];
                     int list_id;
                     if (int.TryParse(listIdTxt, out list_id))
                     {
@@ -93,7 +93,7 @@ namespace AccountingNote.SystemAdmin
             string desc = this.txtDesc.Text;
 
             // 新增模式
-            if (string.IsNullOrWhiteSpace(this.Request.QueryString["list_id"]))
+            if (string.IsNullOrWhiteSpace(this.Request.QueryString["ID"]))
             {
                 AccountingManager.CreateAccountingList(userId, caption, amount, actType, desc);
                 Response.Redirect("/SystemAdmin/AccountingList.aspx");
@@ -101,7 +101,7 @@ namespace AccountingNote.SystemAdmin
             // 更新模式
             else
             {
-                string listIdTxt = this.Request.QueryString["list_id"];
+                string listIdTxt = this.Request.QueryString["ID"];
                 int list_id;
                 if (int.TryParse(listIdTxt, out list_id))
                 {
@@ -152,20 +152,19 @@ namespace AccountingNote.SystemAdmin
             {
                 return false;
             }
-
         }
 
         protected void btnDelete_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(this.Request.QueryString["list_id"]))
+            if (string.IsNullOrEmpty(this.Request.QueryString["ID"]))
             {
                 return;
             }
                 
             int listId;
-            if (int.TryParse(this.Request.QueryString["list_id"], out listId))
+            if (int.TryParse(this.Request.QueryString["ID"], out listId))
             {
-                if (AccountingManager.DeleteAccountingByListId(this.Request.QueryString["list_id"]))
+                if (AccountingManager.DeleteAccountingByListId(this.Request.QueryString["ID"]))
                 {
                     Response.Redirect("/SystemAdmin/AccountingList.aspx");
                 }
