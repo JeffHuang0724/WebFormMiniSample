@@ -9,7 +9,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <div style="width: 100%; height: 100%; display: flex; flex-flow: column; align-items: center; justify-content: center; text-align: center">
+        <div style="width: 100%; height: 30%; display: flex; flex-flow: column; align-items: center; justify-content: center; text-align: center;">
             <table>
                 <tr>
                     <td>
@@ -18,105 +18,95 @@
                 </tr>
             </table>
         </div>
-        <div style="width: 100%; height: 100%; display: flex; flex-flow: column; align-items: center; justify-content: center; text-align: center">
-            <table width="100%">
-                <tr>
-                    <td width="15%">
-                        <div style="float: left; margin-left: 3rem;">
-                            <a href="UserInfo.aspx">使用者資訊</a>
-                            <br />
-                            <br />
-                            <a href="AccountingList.aspx">流水帳管理</a>
-                            <br />
-                            <br />
-                            <a href="/SystemAdmin/UserList.aspx">會員管理 </a>
-                        </div>
-                    </td>
-                    <td width="85%">
-                        <div style="text-align: left; margin-left: 15rem;">
-                            <h1>會員管理</h1>
-                        </div>
-                        <div style="float: left; margin-top: 1.5rem; margin-left: 15rem;">
-                            <table>
-                                <tr>
-                                    <td>
-                                        <div style="float: left;">帳號: </div>
-                                    </td>
-                                    <td>
-                                        <div style="float: left; margin-left: 1rem;">
-                                            <asp:Panel runat="server" ID="pnlAccount">
-                                                <asp:TextBox runat="server" ID="txtUserAccount" Visible="true"></asp:TextBox>
-                                                <asp:Label runat="server" ID="lblUserAccount" Visible="true"></asp:Label>
-                                            </asp:Panel>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div style="float: left; margin-top: 1rem">姓名:</div>
-                                    </td>
-                                    <td>
-                                        <div style="float: left; margin-left: 1rem; margin-top: 1rem;">
-                                            <asp:TextBox ID="txtUserName" runat="server"></asp:TextBox>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div style="float: left; margin-top: 1rem;">Email:</div>
-                                    </td>
-                                    <td>
-                                        <div style="float: left; margin-left: 1rem; margin-top: 1rem;">
-                                            <asp:TextBox ID="txtUserEmail" runat="server" TextMode="Email"></asp:TextBox>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div style="float: left; margin-top: 1rem;">等級:</div>
-                                    </td>
-                                    <td>
-                                        <div style="float: left; margin-left: 1rem; margin-top: 1rem;">
-                                            <asp:DropDownList ID="ddlUserLevel" runat="server" Enabled="false">
-                                                <asp:ListItem Value="0">管理員</asp:ListItem>
-                                                <asp:ListItem Value="1">一般會員</asp:ListItem>
-                                            </asp:DropDownList>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div style="float: left; margin-top: 1rem;">建立時間:</div>
-                                    </td>
-                                    <td>
-                                        <div style="float: left; margin-left: 1rem; margin-top: 1rem;">
-                                            <asp:Label runat="server" ID="lblUserCreateTime"></asp:Label>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div style="float: left;">
-                                            <asp:Button ID="btnSave" runat="server" OnClick="btnSave_Click" Text="Save" Style="margin-top: 1rem; margin-right: 2.5rem" />
-                                            <asp:Button ID="btnDelete" runat="server" OnClick="btnDelete_Click" Text="Delete" Visible="false" Style="margin-top: 1rem;" />
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div style="float: Right;">
-                                            <asp:Button ID="btnChangePwd" runat="server" OnClick="btnChangePwd_Click" Text="前往變更密碼" Style="margin-top: 1rem;" />
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2">
-                                        <asp:Literal runat="server" ID="ltMsg"></asp:Literal>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                    </td>
-                </tr>
-            </table>
+        <div style="width: 100%; height: 70%; display: flex; flex-flow: row; align-items: center; justify-content: flex-start; text-align: center;">
+            <div style="width: 15%; float: left;">
+                <a href="UserInfo.aspx" style="position: absolute; top: 11rem;">使用者資訊</a>
+                <a href="AccountingList.aspx" style="position: absolute; top: 14rem;">流水帳管理</a>
+                <a href="/SystemAdmin/UserList.aspx" style="position: absolute; top: 17rem;">會員管理 </a>
+            </div>
+            <div style="width: 85%; float: right;">
+                <div style="text-align: left; margin-left: 10rem;">
+                    <h1>會員管理</h1>
+                </div>
+                <div style="float: left; margin-top: 1.5rem; margin-left: 10rem;">
+                    <table>
+                        <tr>
+                            <td>
+                                <div style="float: left;">帳號: </div>
+                            </td>
+                            <td>
+                                <div style="float: left; margin-left: 1rem;">
+                                    <asp:Panel runat="server" ID="pnlAccount">
+                                        <asp:TextBox runat="server" ID="txtUserAccount" Visible="true"></asp:TextBox>
+                                        <asp:Label runat="server" ID="lblUserAccount" Visible="true"></asp:Label>
+                                    </asp:Panel>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div style="float: left; margin-top: 1.5rem;">姓名:</div>
+                            </td>
+                            <td>
+                                <div style="float: left; margin-left: 1rem; margin-top: 1.5rem;">
+                                    <asp:TextBox ID="txtUserName" runat="server"></asp:TextBox>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div style="float: left; margin-top: 1.5rem;">Email:</div>
+                            </td>
+                            <td>
+                                <div style="float: left; margin-left: 1rem; margin-top: 1.5rem;">
+                                    <asp:TextBox ID="txtUserEmail" runat="server" TextMode="Email"></asp:TextBox>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div style="float: left; margin-top: 1.5rem;">等級:</div>
+                            </td>
+                            <td>
+                                <div style="float: left; margin-left: 1rem; margin-top: 1.5rem;">
+                                    <asp:DropDownList ID="ddlUserLevel" runat="server" Enabled="false">
+                                        <asp:ListItem Value="0">管理員</asp:ListItem>
+                                        <asp:ListItem Value="1">一般會員</asp:ListItem>
+                                    </asp:DropDownList>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div style="float: left; margin-top: 1.5rem;">建立時間:</div>
+                            </td>
+                            <td>
+                                <div style="float: left; margin-left: 1rem; margin-top: 1.5rem;">
+                                    <asp:Label runat="server" ID="lblUserCreateTime"></asp:Label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div style="float: left;">
+                                    <asp:Button ID="btnSave" runat="server" OnClick="btnSave_Click" Text="Save" Style="margin-top: 1.5rem;" />
+                                    <asp:Button ID="btnDelete" runat="server" OnClick="btnDelete_Click" Text="Delete" Visible="false" Style="margin-top: 1.5rem; margin-left: 3rem;" />
+                                </div>
+                            </td>
+                            <td>
+                                <div style="float: Right;">
+                                    <asp:Button ID="btnChangePwd" runat="server" OnClick="btnChangePwd_Click" Text="前往變更密碼" Style="margin-top: 1rem;" />
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <asp:Literal runat="server" ID="ltMsg"></asp:Literal>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
         </div>
     </form>
 </body>
