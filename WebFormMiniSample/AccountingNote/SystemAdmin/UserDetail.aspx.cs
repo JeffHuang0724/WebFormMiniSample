@@ -72,11 +72,11 @@ namespace AccountingNote.SystemAdmin
                     }
                     else
                     {
-                        this.lblUserAccount.Text = drUserInfo["user_account"].ToString();
-                        this.txtUserName.Text = drUserInfo["user_name"].ToString();
-                        this.txtUserEmail.Text = drUserInfo["user_email"].ToString();
-                        this.ddlUserLevel.SelectedValue = drUserInfo["user_level"].ToString();
-                        this.lblUserCreateTime.Text = drUserInfo["user_create_date"].ToString();
+                        this.lblUserAccount.Text = drUserInfo["Account"].ToString();
+                        this.txtUserName.Text = drUserInfo["Name"].ToString();
+                        this.txtUserEmail.Text = drUserInfo["Email"].ToString();
+                        this.ddlUserLevel.SelectedValue = drUserInfo["UserLevel"].ToString();
+                        this.lblUserCreateTime.Text = drUserInfo["CreateDate"].ToString();
                     }
                 }
             }

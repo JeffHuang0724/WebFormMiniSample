@@ -22,19 +22,19 @@ namespace AccountingNote
                 this.lblAccountingCount.Text = "尚無資料";
             } else
             {
-                this.lblFirstAccountingTime.Text = drAccounting["oldest_date"].ToString();
-                this.lblLastAccountingTime.Text = drAccounting["newest_date"].ToString();
-                this.lblAccountingCount.Text = $"共 {drAccounting["accounting_count"].ToString()} 筆";
+                this.lblFirstAccountingTime.Text = drAccounting["OldestDate"].ToString();
+                this.lblLastAccountingTime.Text = drAccounting["NewestDate"].ToString();
+                this.lblAccountingCount.Text = $"共 {drAccounting["AccountingCount"].ToString()} 筆";
             }
 
             // 取得會員數
             DataRow drUserCount =  UserInfoManager.GetUserCount();
-            if(drUserCount["user_count"] == null)
+            if(drUserCount["UserCount"] == null)
             {
                 this.lblUserCount.Text = "尚無資料";
             }else
             {
-                this.lblUserCount.Text = $"共 {drUserCount["user_count"].ToString()} 人";
+                this.lblUserCount.Text = $"共 {drUserCount["UserCount"].ToString()} 人";
             }
             
         }

@@ -40,7 +40,7 @@ namespace AccountingNote.SystemAdmin
                 if(drAccAdd != null)
                 {
                     
-                    if (!int.TryParse(drAccAdd["accounting_add_amount"].ToString(), out accountingAddAmount))
+                    if (!int.TryParse(drAccAdd["AccountingAddAmount"].ToString(), out accountingAddAmount))
                     {
                         accountingAddAmount = 0;
                     }
@@ -54,7 +54,7 @@ namespace AccountingNote.SystemAdmin
                 var drAccMin = AccountingManager.GetAccountingMinusAmount(currentUser.user_id);
                 if (drAccMin != null)
                 {
-                    if (!int.TryParse(drAccMin["accounting_minus_amount"].ToString(), out accountingMinAmount))
+                    if (!int.TryParse(drAccMin["AccountingMinusAmount"].ToString(), out accountingMinAmount))
                     {
                         accountingMinAmount = 0;
                     }
@@ -89,8 +89,8 @@ namespace AccountingNote.SystemAdmin
                 Literal ltl = row.FindControl("ltActType") as Literal;
                 Label lbl = row.FindControl("lblAmount") as Label;
                 var dr = row.DataItem as DataRowView;
-                int actType = dr.Row.Field<int>("act_type");
-                lbl.Text = Convert.ToString(dr.Row.Field<int>("amount"));
+                int actType = dr.Row.Field<int>("ActType");
+                lbl.Text = Convert.ToString(dr.Row.Field<int>("Amount"));
 
                 if (actType == 0)
                 {
@@ -101,7 +101,7 @@ namespace AccountingNote.SystemAdmin
                     ltl.Text = "收入";
                 }
 
-                if(dr.Row.Field<int>("amount") > 1500)
+                if(dr.Row.Field<int>("Amount") > 1500)
                 {
                     lbl.ForeColor = Color.Red;
                 }

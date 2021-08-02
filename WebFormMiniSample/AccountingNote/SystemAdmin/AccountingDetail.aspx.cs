@@ -54,10 +54,10 @@ namespace AccountingNote.SystemAdmin
                         }
                         else
                         {
-                            this.ddlActType.SelectedValue = drAccounting["act_type"].ToString();
-                            this.txtAmount.Text = drAccounting["amount"].ToString();
-                            this.txtCaption.Text = drAccounting["caption"].ToString();
-                            this.txtDesc.Text = drAccounting["description"].ToString();
+                            this.ddlActType.SelectedValue = drAccounting["ActType"].ToString();
+                            this.txtAmount.Text = drAccounting["Amount"].ToString();
+                            this.txtCaption.Text = drAccounting["Caption"].ToString();
+                            this.txtDesc.Text = drAccounting["Body"].ToString();
                         }
                     }
                     else

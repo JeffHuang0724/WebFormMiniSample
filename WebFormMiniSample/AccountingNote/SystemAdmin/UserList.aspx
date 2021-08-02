@@ -54,19 +54,19 @@
                                         <!-- Main -->
                                         <asp:GridView ID="gvUserList" runat="server" AutoGenerateColumns="false" OnRowDataBound="gvUserList_RowDataBound">
                                             <Columns>
-                                                <asp:BoundField HeaderText="帳號" DataField="user_account" />
-                                                <asp:BoundField HeaderText="姓名" DataField="user_name" />
-                                                <asp:BoundField HeaderText="Email" DataField="user_email" />
+                                                <asp:BoundField HeaderText="帳號" DataField="Account" />
+                                                <asp:BoundField HeaderText="姓名" DataField="Name" />
+                                                <asp:BoundField HeaderText="Email" DataField="Email" />
                                                 <asp:TemplateField HeaderText="等級">
                                                     <ItemTemplate>
-                                                        <!--  <%# ((int)Eval("user_level") == 0) ? "管理員" : "一般會員" %> -->
+                                                        <!--  <%# ((int)Eval("UserLevel") == 0) ? "管理員" : "一般會員" %> -->
                                                         <asp:Literal runat="server" ID="ltUserLevel"></asp:Literal>
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
-                                                <asp:BoundField HeaderText="建立日期" DataField="user_create_date" DataFormatString="{0:yyyy-MM-dd}" />
+                                                <asp:BoundField HeaderText="建立日期" DataField="CreateDate" DataFormatString="{0:yyyy-MM-dd}" />
                                                 <asp:TemplateField HeaderText="Act">
                                                     <ItemTemplate>
-                                                        <a href="/SystemAdmin/UserDetail.aspx?user_id=<%# Eval("user_id") %>">Edit</a>
+                                                        <a href="/SystemAdmin/UserDetail.aspx?user_id=<%# Eval("ID") %>">Edit</a>
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
                                             </Columns>

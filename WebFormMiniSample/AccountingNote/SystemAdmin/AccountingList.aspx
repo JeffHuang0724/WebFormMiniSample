@@ -56,22 +56,22 @@
                                         <!-- Main -->
                                         <asp:GridView ID="gvAccountingList" runat="server" AutoGenerateColumns="false" OnRowDataBound="gvAccountingList_RowDataBound">
                                             <Columns>
-                                                <asp:BoundField HeaderText="標題" DataField="caption" />
+                                                <asp:BoundField HeaderText="建立日期" DataField="CreateDate" DataFormatString="{0:yyyy-MM-dd}" />
+                                                <asp:TemplateField HeaderText="IN / OUT">
+                                                    <ItemTemplate>
+                                                        <!--  <%# ((int)Eval("ActType") == 0) ? "支出" : "收入" %> -->
+                                                        <asp:Literal runat="server" ID="ltActType"></asp:Literal>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
                                                 <asp:TemplateField HeaderText="金額">
                                                     <ItemTemplate>
                                                         <asp:Label runat="server" ID="lblAmount"></asp:Label>
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
-                                                <asp:TemplateField HeaderText="IN / OUT">
-                                                    <ItemTemplate>
-                                                        <!--  <%# ((int)Eval("act_type") == 0) ? "支出" : "收入" %> -->
-                                                        <asp:Literal runat="server" ID="ltActType"></asp:Literal>
-                                                    </ItemTemplate>
-                                                </asp:TemplateField>
-                                                <asp:BoundField HeaderText="建立日期" DataField="create_date" DataFormatString="{0:yyyy-MM-dd}" />
+                                                <asp:BoundField HeaderText="標題" DataField="caption" />
                                                 <asp:TemplateField HeaderText="Act">
                                                     <ItemTemplate>
-                                                        <a href="/SystemAdmin/AccountingDetail.aspx?list_id=<%# Eval("list_id") %>">Edit</a>
+                                                        <a href="/SystemAdmin/AccountingDetail.aspx?list_id=<%# Eval("ID") %>">Edit</a>
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
                                             </Columns>

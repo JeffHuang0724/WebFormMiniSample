@@ -25,13 +25,13 @@ namespace AccountingNote.DBSource
             // <<<<< check input >>>>>
 
             string connectionString = DBHealper.GetConnectionString();
-            string queryString = $@"INSERT INTO [dbo].[accounting]
-                                                               (user_id
-                                                               ,caption
-                                                               ,amount
-                                                               ,act_type
-                                                               ,create_date
-                                                               ,description)
+            string queryString = $@"INSERT INTO [dbo].[AccountingNote]
+                                                               (UserID
+                                                               ,Caption
+                                                               ,Amount
+                                                               ,ActType
+                                                               ,CreateDate
+                                                               ,Body)
                                                  VALUES
                                                                 (@user_id
                                                                ,@caption
@@ -70,16 +70,16 @@ namespace AccountingNote.DBSource
             // <<<<< check input >>>>>
 
             string connectionString = DBHealper.GetConnectionString();
-            string queryString = $@" UPDATE [dbo].[accounting]
+            string queryString = $@" UPDATE [dbo].[AccountingNote]
                                                   SET
-                                                               user_id = @user_id
-                                                               ,caption = @caption
-                                                               ,amount = @amount
-                                                               ,act_type = @act_type
-                                                               ,create_date = @create_date
-                                                               ,description = @description
+                                                               UserID = @user_id
+                                                               ,Caption = @caption
+                                                               ,Amount = @amount
+                                                               ,ActType = @act_type
+                                                               ,CreateDate = @create_date
+                                                               ,Body = @description
                                                  WHERE
-                                                               list_id = @list_id;";
+                                                               ID = @list_id;";
             List<SqlParameter> list = new List<SqlParameter>();
             list.Add(new SqlParameter("@list_id", list_id));
             list.Add(new SqlParameter("@user_id", user_id));
@@ -102,8 +102,8 @@ namespace AccountingNote.DBSource
         {
             string connectionString = DBHealper.GetConnectionString();
             string queryString = $@"DELETE 
-                                                 FROM accounting 
-                                                 WHERE list_id = @list_id;";
+                                                 FROM AccountingNote 
+                                                 WHERE ID = @list_id;";
             List<SqlParameter> list = new List<SqlParameter>();
             list.Add(new SqlParameter("@list_id", list_id));
 
@@ -121,14 +121,14 @@ namespace AccountingNote.DBSource
         {
             string connectionString = DBHealper.GetConnectionString();
             string dbCommandString = $@"SELECT 
-                                                                  list_id
-                                                                  ,caption
-                                                                  ,amount
-                                                                  ,act_type
-                                                                  ,create_date
-                                                              FROM accounting
-                                                              WHERE user_id = @userId
-                                                              ORDER BY create_date DESC;";
+                                                                  ID
+                                                                  ,Caption
+                                                                  ,Amount
+                                                                  ,ActType
+                                                                  ,CreateDate
+                                                              FROM AccountingNote
+                                                              WHERE UserID = @userId
+                                                              ORDER BY CreateDate DESC;";
 
             List<SqlParameter> list = new List<SqlParameter>();
             list.Add(new SqlParameter("@userId", userId));
@@ -147,13 +147,13 @@ namespace AccountingNote.DBSource
         {
             string connectionString = DBHealper.GetConnectionString();
             string dbCommandString = $@"SELECT 
-                                                                  caption
-                                                                 ,amount
-                                                                  ,act_type
-                                                                  ,create_date
-                                                                  ,description
-                                                                FROM accounting
-                                                                WHERE list_id = @list_id AND user_id = @user_id;";
+                                                                  Caption
+                                                                 ,Amount
+                                                                  ,ActType
+                                                                  ,CreateDate
+                                                                  ,Body
+                                                                FROM AccountingNote
+                                                                WHERE ID = @list_id AND UserID = @user_id;";
 
             List<SqlParameter> list = new List<SqlParameter>();
             list.Add(new SqlParameter("@list_id", list_id));
@@ -173,8 +173,8 @@ namespace AccountingNote.DBSource
         {
             string connectionString = DBHealper.GetConnectionString();
             string dbCommandString = $@"SELECT 
-                                                                    COUNT(list_id) AS accounting_count, MAX(create_date) AS newest_date, MIN(create_date) AS  oldest_date
-                                                               FROM  accounting;";
+                                                                    COUNT(ID) AS AccountingCount, MAX(CreateDate) AS NewestDate, MIN(CreateDate) AS  OldestDate
+                                                               FROM  AccountingNote;";
 
             List<SqlParameter> list = new List<SqlParameter>();
             try
@@ -191,9 +191,9 @@ namespace AccountingNote.DBSource
         {
             string connectionString = DBHealper.GetConnectionString();
             string dbCommandString =  $@" SELECT 
-                                                                    SUM(amount) AS 'accounting_add_amount'
-                                                                 FROM accounting
-                                                                 WHERE act_type = '1' AND user_id = @userId;";
+                                                                    SUM(Amount) AS 'AccountingAddAmount'
+                                                                 FROM AccountingNote
+                                                                 WHERE ActType = '1' AND UserID = @userId;";
 
             List<SqlParameter> list = new List<SqlParameter>();
             list.Add(new SqlParameter("@userId", userId));
@@ -212,9 +212,9 @@ namespace AccountingNote.DBSource
         {
             string connectionString = DBHealper.GetConnectionString();
             string dbCommandString = $@" SELECT 
-                                                                   SUM(amount) AS 'accounting_minus_amount'
-                                                                FROM accounting
-                                                                WHERE act_type = '0' AND user_id = @userId;";
+                                                                   SUM(Amount) AS 'AccountingMinusAmount'
+                                                                FROM AccountingNote
+                                                                WHERE ActType = '0' AND UserID = @userId;";
 
             List<SqlParameter> list = new List<SqlParameter>();
             list.Add(new SqlParameter("@userId", userId));

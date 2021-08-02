@@ -55,7 +55,7 @@ namespace AccountingNote.SystemAdmin
             {
                 Literal ltl = row.FindControl("ltUserLevel") as Literal;
                 var dr = row.DataItem as DataRowView;
-                int userLevel = dr.Row.Field<int>("user_level");
+                int userLevel = dr.Row.Field<int>("UserLevel");
 
                 if (userLevel == 0)
                 {

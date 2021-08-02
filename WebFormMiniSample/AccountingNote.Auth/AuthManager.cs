@@ -39,12 +39,12 @@ namespace AccountingNote.Auth
             }
 
             UserInfoModel model = new UserInfoModel();
-            model.user_id = userDr["user_id"].ToString();
-            model.user_account = userDr["user_account"].ToString();
-            model.user_name = userDr["user_name"].ToString();
-            model.user_email = userDr["user_email"].ToString();
-            model.user_level = userDr["user_level"].ToString();
-            model.user_create_date = userDr["user_create_date"].ToString();
+            model.user_id = userDr["ID"].ToString();
+            model.user_account = userDr["Account"].ToString();
+            model.user_name = userDr["Name"].ToString();
+            model.user_email = userDr["Email"].ToString();
+            model.user_level = userDr["UserLevel"].ToString();
+            model.user_create_date = userDr["CreateDate"].ToString();
 
             return model;
         }
@@ -67,10 +67,10 @@ namespace AccountingNote.Auth
             }
 
             // check account / password
-            if (string.Compare(dr["user_account"].ToString(), user_account, true) == 0 &&
-                string.Compare(dr["user_password"].ToString(), user_password, false) == 0)
+            if (string.Compare(dr["Account"].ToString(), user_account, true) == 0 &&
+                string.Compare(dr["PWD"].ToString(), user_password, false) == 0)
             {
-                HttpContext.Current.Session["UserLoginInfo"] = dr["user_account"].ToString();
+                HttpContext.Current.Session["UserLoginInfo"] = dr["Account"].ToString();
                 errMsg = string.Empty;
                 return true;
             }

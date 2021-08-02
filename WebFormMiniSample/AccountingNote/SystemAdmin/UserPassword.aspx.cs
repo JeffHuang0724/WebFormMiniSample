@@ -56,7 +56,7 @@ namespace AccountingNote.SystemAdmin
                     }
                     else
                     {
-                        this.lblUserAccount.Text = drUserInfo["user_account"].ToString();
+                        this.lblUserAccount.Text = drUserInfo["Account"].ToString();
                     }
                 }
             }
@@ -126,7 +126,7 @@ namespace AccountingNote.SystemAdmin
             {
                 // 確認與資料庫密碼是否相符
                 var userDr = UserInfoManager.GetUserPassword(this.Request.QueryString["user_id"]);
-                if (String.Compare(userDr["user_password"].ToString(), this.txtOldPwd.Text) != 0)
+                if (String.Compare(userDr["PWD"].ToString(), this.txtOldPwd.Text) != 0)
                 {
                     msgList.Add("密碼不符，請重新確認");
                 }
