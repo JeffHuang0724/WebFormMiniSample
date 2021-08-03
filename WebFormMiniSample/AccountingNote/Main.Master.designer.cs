@@ -7,47 +7,47 @@
 // </自動產生的>
 //------------------------------------------------------------------------------
 
-namespace AccountingNote.SystemAdmin
+namespace AccountingNote
 {
 
 
-    public partial class UserList
+    public partial class Main
     {
 
         /// <summary>
-        /// btnCreate 控制項。
+        /// form1 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCreate;
+        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
-        /// gvUserList 控制項。
+        /// ContentHeader 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvUserList;
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder ContentHeader;
 
         /// <summary>
-        /// ucPager 控制項。
+        /// ContentHeader2 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::AccountingNote.UserControls.ucPagers ucPager;
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder ContentHeader2;
 
         /// <summary>
-        /// plcNoData 控制項。
+        /// ContentBody 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.PlaceHolder plcNoData;
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder ContentBody;
     }
 }

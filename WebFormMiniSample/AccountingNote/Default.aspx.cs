@@ -22,8 +22,8 @@ namespace AccountingNote
                 this.lblAccountingCount.Text = "尚無資料";
             } else
             {
-                this.lblFirstAccountingTime.Text = drAccounting["OldestDate"].ToString();
-                this.lblLastAccountingTime.Text = drAccounting["NewestDate"].ToString();
+                this.lblFirstAccountingTime.Text = Convert.ToDateTime(drAccounting["OldestDate"]).ToString("yyyy/MM/dd HH:mm:ss");
+                this.lblLastAccountingTime.Text = Convert.ToDateTime(drAccounting["NewestDate"]).ToString("yyyy/MM/dd HH:mm:ss");
                 this.lblAccountingCount.Text = $"共 {drAccounting["AccountingCount"].ToString()} 筆";
             }
 

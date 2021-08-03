@@ -117,6 +117,25 @@ namespace AccountingNote.DBSource
                 return false;
             }
         }
+        public static bool DeleteAccountingByUserId(string user_id)
+        {
+            string connectionString = DBHealper.GetConnectionString();
+            string queryString = $@"DELETE 
+                                                 FROM AccountingNote 
+                                                 WHERE UserID = @user_id;";
+            List<SqlParameter> list = new List<SqlParameter>();
+            list.Add(new SqlParameter("@user_id", user_id));
+
+            try
+            {
+                return DBHealper.ModifyData(connectionString, queryString, list);
+            }
+            catch (Exception ex)
+            {
+                Logger.WriteLog(ex);
+                return false;
+            }
+        }
         public static DataTable GetAccountingList(string userId)
         {
             string connectionString = DBHealper.GetConnectionString();

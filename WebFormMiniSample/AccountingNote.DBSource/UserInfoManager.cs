@@ -11,7 +11,7 @@ namespace AccountingNote.DBSource
 {
     public class UserInfoManager
     {
-        public static void CreateUserInfo(string user_account, string user_name, string user_email, int user_level)
+        public static void CreateUserInfo(string user_account, string user_name, string user_email, int user_level, DateTime create_date)
         {
             // <<<<< check input >>>>>
             if (user_level < 0 || user_level > 1)
@@ -46,7 +46,7 @@ namespace AccountingNote.DBSource
             list.Add(new SqlParameter("@user_name", user_name));
             list.Add(new SqlParameter("@user_email", user_email));
             list.Add(new SqlParameter("@user_level", user_level));
-            list.Add(new SqlParameter("@user_create_date", DateTime.Now));
+            list.Add(new SqlParameter("@user_create_date", create_date));
             try
             {
                 DBHealper.CreateData(connectionString, queryString, list);

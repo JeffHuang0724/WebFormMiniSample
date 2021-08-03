@@ -40,10 +40,7 @@ namespace AccountingNote.SystemAdmin
 
                 this.ucPager.TotalSize = dt.Rows.Count;
                 this.ucPager.Bind();
-                /*
-                this.gvUserList.DataSource = dt;
-                this.gvUserList.DataBind();
-                */
+
             } else
             {
                 this.gvUserList.Visible = false;
@@ -72,8 +69,8 @@ namespace AccountingNote.SystemAdmin
         {
             DataTable dtPaged = dt.Clone();
 
-            int startIndex = (this.GetCurrentPage() - 1) * 5;
-            int endIndex = (this.GetCurrentPage()) * 5;
+            int startIndex = (this.GetCurrentPage() - 1) * 10;
+            int endIndex = (this.GetCurrentPage()) * 10;
 
             if (endIndex > dt.Rows.Count)
                 endIndex = dt.Rows.Count;

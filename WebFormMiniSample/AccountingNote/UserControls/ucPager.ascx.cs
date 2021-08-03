@@ -23,7 +23,7 @@ namespace AccountingNote.UserControls
         public void Bind()
         {
             int totalPages = this.GetTotalPages();
-            this.ltPager.Text = $"共 {this.TotalSize} 筆， 共 {totalPages} 頁， 現在 {this.GetCurrentPage()} 頁<br/>";
+            this.ltPager.Text = $"共 {this.TotalSize} 筆， 共 {totalPages} 頁， 現在位於第 {this.GetCurrentPage()} 頁<br/><br/>";
             for (var i = 1; i <= totalPages; i++)
             {
                 this.ltPager.Text += $"<a href='{this.Url}?page={i}'>{i}</a>&nbsp";

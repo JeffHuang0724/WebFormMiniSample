@@ -29,24 +29,42 @@ namespace AccountingNote.SystemAdmin
                 return;
             }
 
+            
+            if (this.IsPostBack)
+            {
+                if (this.Request.QueryString["UID"] == null)
+                {
+                    // 移除帳號 Label 
+                    this.pnlAccount.Controls.Remove(this.lblUserAccount);
+                    this.pnlAccount.Controls.Add(this.txtUserAccount);
+                }
+                else
+                {
+                    // 移除帳號 TextBox 
+                    this.pnlAccount.Controls.Remove(this.txtUserAccount);
+                    this.pnlAccount.Controls.Add(this.lblUserAccount);
+                }
+            }
+            
+
             if (!this.IsPostBack)
             {
                 // 新增模式
                 if (this.Request.QueryString["UID"] == null)
                 {
-                    // 移除帳號 Label 
                     this.pnlAccount.Controls.Remove(this.lblUserAccount);
+                    this.pnlAccount.Controls.Add(this.txtUserAccount);
                     this.btnDelete.Visible = false;
                     this.btnChangePwd.Visible = false;
                     // 新增模式等級限制 為一般會員
-                    this.ddlUserLevel.SelectedValue = "1";
-                    
+                    this.lblUserLevel.Text = "一般會員";
+                    this.lblUserCreateTime.Text = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
                 }
                 // 編輯模式
                 else
                 {
-                    // 移除帳號 TextBox 
                     this.pnlAccount.Controls.Remove(this.txtUserAccount);
+                    this.pnlAccount.Controls.Add(this.lblUserAccount);
                     this.btnDelete.Visible = true;
                     this.btnChangePwd.Visible = true;
                     string userIdTxt = this.Request.QueryString["UID"];
@@ -73,8 +91,16 @@ namespace AccountingNote.SystemAdmin
                         this.lblUserAccount.Text = drUserInfo["Account"].ToString();
                         this.txtUserName.Text = drUserInfo["Name"].ToString();
                         this.txtUserEmail.Text = drUserInfo["Email"].ToString();
-                        this.ddlUserLevel.SelectedValue = drUserInfo["UserLevel"].ToString();
-                        this.lblUserCreateTime.Text = drUserInfo["CreateDate"].ToString();
+                        // 會員等級
+                        if (drUserInfo["UserLevel"].ToString() == "0")
+                        {
+                            lblUserLevel.Text = "管理員";
+                        }
+                        else
+                        {
+                            lblUserLevel.Text = "一般會員";
+                        }
+                        this.lblUserCreateTime.Text = Convert.ToDateTime(drUserInfo["CreateDate"]).ToString("yyyy/MM/dd HH:mm:ss");
                     }
                 }
             }
@@ -84,7 +110,7 @@ namespace AccountingNote.SystemAdmin
         {
             List<string> msgList = new List<string>();
             // Check Input
-            if (!this.CheckInpu(out msgList))
+            if (!this.CheckInput(out msgList))
             {
                 this.ltMsg.Text = string.Join("<br />", msgList);
                 return;
@@ -101,17 +127,23 @@ namespace AccountingNote.SystemAdmin
             string userAccount = this.txtUserAccount.Text;
             string userName = this.txtUserName.Text;
             string userEmail = this.txtUserEmail.Text;
-            // 如果UserLevel 無法轉型，一律強制為一般使用者(1)
+            // UserLevel 轉型
             int userLevel;
-            if(!int.TryParse(this.ddlUserLevel.SelectedValue, out userLevel))
+            if (this.lblUserLevel.Text == "管理員")
+            {
+                userLevel = 0;
+            }
+            else
             {
                 userLevel = 1;
             }
+            DateTime createDate = Convert.ToDateTime(this.lblUserCreateTime.Text);
+
 
             // 新增模式
             if (string.IsNullOrWhiteSpace(this.Request.QueryString["UID"]))
             {
-                UserInfoManager.CreateUserInfo(userAccount, userName, userEmail, userLevel);
+                UserInfoManager.CreateUserInfo(userAccount, userName, userEmail, userLevel, createDate);
                 Response.Redirect("/SystemAdmin/UserList.aspx");
             }
 
@@ -135,12 +167,12 @@ namespace AccountingNote.SystemAdmin
             if (string.IsNullOrEmpty(this.Request.QueryString["UID"]))
                 return;
 
-            var alertSuccess = MessageBox.Show("確定要刪除此帳號嗎", "警告提示",
-                                         MessageBoxButtons.OK,
+            var alertSuccess = MessageBox.Show("若刪除帳號，流水帳資料也會一併刪除！ 確定要刪除嗎？", "警告提示",
+                                         MessageBoxButtons.YesNo,
                                          MessageBoxIcon.Warning);
-            if (alertSuccess == DialogResult.OK)
+            if (alertSuccess == DialogResult.Yes)
             {
-                if (UserInfoManager.DeleteUserInfo(this.Request.QueryString["UID"]))
+                if (UserInfoManager.DeleteUserInfo(this.Request.QueryString["UID"]) && AccountingManager.DeleteAccountingByUserId(this.Request.QueryString["UID"]))
                 {
                     Response.Redirect("/SystemAdmin/UserList.aspx");
                 }
@@ -156,7 +188,7 @@ namespace AccountingNote.SystemAdmin
             Response.Redirect($"/SystemAdmin/UserPassword.aspx?UID={this.Request.QueryString["UID"]}");
         }
 
-        private bool CheckInpu(out List<string> errMsgList)
+        private bool CheckInput(out List<string> errMsgList)
         {
             List<string> msgList = new List<string>();
             // check Account

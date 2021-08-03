@@ -15,15 +15,6 @@ namespace AccountingNote.SystemAdmin
     {
 
         /// <summary>
-        /// form1 控制項。
-        /// </summary>
-        /// <remarks>
-        /// 自動產生的欄位。
-        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
-
-        /// <summary>
         /// pnlAccount 控制項。
         /// </summary>
         /// <remarks>
@@ -69,13 +60,13 @@ namespace AccountingNote.SystemAdmin
         protected global::System.Web.UI.WebControls.TextBox txtUserEmail;
 
         /// <summary>
-        /// ddlUserLevel 控制項。
+        /// lblUserLevel 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlUserLevel;
+        protected global::System.Web.UI.WebControls.Label lblUserLevel;
 
         /// <summary>
         /// lblUserCreateTime 控制項。
