@@ -175,8 +175,7 @@ namespace AccountingNote.SystemAdmin
                 if (UserInfoManager.DeleteUserInfo(this.Request.QueryString["UID"]))
                 {
                     // 抓取使用者在AccountingNote 筆數
-                    var currentUser = AuthManager.GetCurentUser();
-                    var dt = AccountingManager.GetAccountingList(currentUser.user_id);
+                    var dt = AccountingManager.GetAccountingList(this.Request.QueryString["UID"]);
                     if(dt.Rows.Count == 0)
                     {
                         Response.Redirect("/SystemAdmin/UserList.aspx");
