@@ -172,13 +172,28 @@ namespace AccountingNote.SystemAdmin
                                          MessageBoxIcon.Warning);
             if (alertSuccess == DialogResult.Yes)
             {
-                if (UserInfoManager.DeleteUserInfo(this.Request.QueryString["UID"]) && AccountingManager.DeleteAccountingByUserId(this.Request.QueryString["UID"]))
+                if (UserInfoManager.DeleteUserInfo(this.Request.QueryString["UID"]))
                 {
-                    Response.Redirect("/SystemAdmin/UserList.aspx");
+                    // 抓取使用者在AccountingNote 筆數
+                    var currentUser = AuthManager.GetCurentUser();
+                    var dt = AccountingManager.GetAccountingList(currentUser.user_id);
+                    if(dt.Rows.Count == 0)
+                    {
+                        Response.Redirect("/SystemAdmin/UserList.aspx");
+                    } else
+                    {
+                        if (AccountingManager.DeleteAccountingByUserId(this.Request.QueryString["UID"]))
+                        {
+                            Response.Redirect("/SystemAdmin/UserList.aspx");
+                        } else
+                        {
+                            ltMsg.Text = "流水帳刪除失敗";
+                        }
+                    }
                 }
                 else
                 {
-                    ltMsg.Text = "刪除失敗";
+                    ltMsg.Text = "會員資料刪除失敗";
                 }
             }
         }

@@ -27,7 +27,7 @@
     <table style="margin-top: 1rem">
         <tr>
             <td>
-                <asp:Button runat="server" ID="btnLogout" Text="Logout" Font-Size="Medium" />
+                <asp:Button runat="server" ID="btnLogout" OnClick="btnLogout_Click" Text="Logout" Font-Size="Medium" />
             </td>
             <td></td>
         </tr>

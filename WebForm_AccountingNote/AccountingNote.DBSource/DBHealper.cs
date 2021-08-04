@@ -39,7 +39,8 @@ namespace AccountingNote.DBSource
 
                     conn.Open();
                     int effectRows = command.ExecuteNonQuery();
-                    if (effectRows == 1)
+                    // AccountingNote 有可能有多筆刪除的可能
+                    if (effectRows >= 1)
                     {
                         return true;
                     }

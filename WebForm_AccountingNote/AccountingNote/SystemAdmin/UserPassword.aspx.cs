@@ -116,11 +116,15 @@ namespace AccountingNote.SystemAdmin
             if (string.IsNullOrWhiteSpace(txtOldPwd.Text) || string.IsNullOrWhiteSpace(txtOldCommitPwd.Text) || string.IsNullOrWhiteSpace(txtNewPwd.Text))
             {
                 msgList.Add("密碼不得為空，請重新確認");
+                errMsgList = msgList;
+                return false;
             }
             // 確認原密碼以及確認密碼 兩者是否一致
             if (string.Compare(this.txtOldPwd.Text, this.txtOldCommitPwd.Text) != 0)
             {
                 msgList.Add("密碼不一致，請重新確認");
+                errMsgList = msgList;
+                return false;
             }
             else
             {
@@ -129,6 +133,8 @@ namespace AccountingNote.SystemAdmin
                 if (String.Compare(userDr["PWD"].ToString(), this.txtOldPwd.Text) != 0)
                 {
                     msgList.Add("密碼不符，請重新確認");
+                    errMsgList = msgList;
+                    return false;
                 }
             }
 
@@ -136,6 +142,8 @@ namespace AccountingNote.SystemAdmin
             if (this.txtNewPwd.Text.Replace(" ", "").Length < 8 || this.txtNewPwd.Text.Replace(" ", "").Length > 16)
             {
                 msgList.Add("密碼長度須為8~16個字，請重新確認");
+                errMsgList = msgList;
+                return false;
             }
             errMsgList = msgList;
             if (msgList.Count == 0)
