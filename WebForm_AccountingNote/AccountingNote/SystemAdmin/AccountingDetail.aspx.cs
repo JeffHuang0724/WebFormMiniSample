@@ -48,12 +48,14 @@ namespace AccountingNote.SystemAdmin
                         var drAccounting = AccountingManager.GetAccountingByListId(list_id, currentUser.user_id);
                         if (drAccounting == null)
                         {
+                            this.plcHasData.Visible = false;
                             this.ltMsg.Text = "資料不存在";
                             this.btnSave.Visible = false;
                             this.btnDelete.Visible = false;
                         }
                         else
                         {
+                            this.plcHasData.Visible = true;
                             this.ddlActType.SelectedValue = drAccounting["ActType"].ToString();
                             this.txtAmount.Text = drAccounting["Amount"].ToString();
                             this.txtCaption.Text = drAccounting["Caption"].ToString();

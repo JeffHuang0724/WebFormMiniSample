@@ -34,14 +34,15 @@ namespace AccountingNote.SystemAdmin
             var dt = AccountingManager.GetAccountingList(currentUser.user_id);
             if(dt.Rows.Count > 0)
             {
-                // 20210802 控制項
+                // 控制項
                 var dtPaged = this.GetPageDataTable(dt);
+
+                this.ucPager.TotalSize = dt.Rows.Count;
+                this.ucPager.Bind();
 
                 this.gvAccountingList.DataSource = dtPaged;
                 this.gvAccountingList.DataBind();
 
-                this.ucPager.TotalSize = dt.Rows.Count;
-                this.ucPager.Bind();
                 // 20210802
 
 
@@ -83,6 +84,7 @@ namespace AccountingNote.SystemAdmin
                 //20210802
             } else
             {
+                this.ucPager.Visible = false;
                 this.lblAmount.Visible = false;
                 this.gvAccountingList.Visible = false;
                 this.plcNoData.Visible = true;
@@ -111,9 +113,10 @@ namespace AccountingNote.SystemAdmin
         private DataTable GetPageDataTable (DataTable dt)
         {
             DataTable dtPaged = dt.Clone();
+            int pageSize = this.ucPager.PageSize;
            
-            int startIndex = (this.GetCurrentPage() - 1) * 10;
-            int endIndex = (this.GetCurrentPage()) * 10;
+            int startIndex = (this.GetCurrentPage() - 1) * pageSize;
+            int endIndex = (this.GetCurrentPage()) * pageSize;
 
             if (endIndex > dt.Rows.Count)
                 endIndex = dt.Rows.Count;

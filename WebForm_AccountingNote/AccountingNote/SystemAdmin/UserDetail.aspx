@@ -5,6 +5,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentBody" runat="server">
     <table>
+        <asp:PlaceHolder ID="plcHasData" runat="server" Visible="true">
         <tr>
             <td>
                 <div style="float: left;">帳號: </div>
@@ -71,6 +72,7 @@
                 </div>
             </td>
         </tr>
+            </asp:PlaceHolder>
         <tr>
             <td colspan="2">
                 <asp:Literal runat="server" ID="ltMsg"></asp:Literal>

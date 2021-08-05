@@ -82,12 +82,15 @@ namespace AccountingNote.SystemAdmin
                     var drUserInfo = UserInfoManager.GetUserInfoByUserId(userIdTxt);
                     if (drUserInfo == null)
                     {
+                        this.plcHasData.Visible = false;
                         this.ltMsg.Text = "資料不存在";
                         this.btnSave.Visible = false;
                         this.btnDelete.Visible = false;
+                        this.btnChangePwd.Visible = false;
                     }
                     else
                     {
+                        this.plcHasData.Visible = true;
                         this.lblUserAccount.Text = drUserInfo["Account"].ToString();
                         this.txtUserName.Text = drUserInfo["Name"].ToString();
                         this.txtUserEmail.Text = drUserInfo["Email"].ToString();

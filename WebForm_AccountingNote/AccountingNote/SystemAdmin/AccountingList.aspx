@@ -45,7 +45,7 @@
             <SortedDescendingHeaderStyle BackColor="#4870BE" />
         </asp:GridView>
         <div style="margin-top: 1rem;">
-            <uc1:ucPager runat="server" ID="ucPager" PageSize="10" CurrentPage="1" TotalSize="10" Url="AccountingList.aspx" />
+            <uc1:ucPager runat="server" ID="ucPager" PageSize="10" CurrentPage="1" TotalSize="10" Url="/SystemAdmin/AccountingList.aspx" />
             <asp:PlaceHolder ID="plcNoData" runat="server" Visible="false">
                 <p style="color: red; background-color: cornflowerblue;">
                     No data in your Accounting Note.

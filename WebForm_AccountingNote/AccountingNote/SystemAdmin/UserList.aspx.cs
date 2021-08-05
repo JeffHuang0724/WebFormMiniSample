@@ -43,6 +43,7 @@ namespace AccountingNote.SystemAdmin
 
             } else
             {
+                this.ucPager.Visible = false;
                 this.gvUserList.Visible = false;
                 this.plcNoData.Visible = true;
             }
@@ -50,7 +51,7 @@ namespace AccountingNote.SystemAdmin
 
         private int GetCurrentPage()
         {
-            string pageText = Request.QueryString["Page"];
+            string pageText = Request.QueryString["page"];
 
             if (string.IsNullOrWhiteSpace(pageText))
                 return 1;
