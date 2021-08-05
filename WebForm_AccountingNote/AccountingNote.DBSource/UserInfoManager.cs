@@ -11,6 +11,7 @@ namespace AccountingNote.DBSource
 {
     public class UserInfoManager
     {
+        /// <summary> 創建會員資訊 </summary>
         public static void CreateUserInfo(string user_account, string user_name, string user_email, int user_level, DateTime create_date)
         {
             // <<<<< check input >>>>>
@@ -56,6 +57,7 @@ namespace AccountingNote.DBSource
                 Logger.WriteLog(ex);
             }
         }
+        /// <summary> 更新會員資訊 </summary>
         public static bool UpdateUserInfo(string user_id, string user_name, string user_email)
         {
             string connectionString = DBHealper.GetConnectionString();
@@ -80,6 +82,7 @@ namespace AccountingNote.DBSource
                 return false;
             }
         }
+        /// <summary> 刪除會員資訊 </summary>
         public static bool DeleteUserInfo(string user_id)
         {
             string connectionString = DBHealper.GetConnectionString();
@@ -99,7 +102,7 @@ namespace AccountingNote.DBSource
                 return false;
             }
         }
-
+        /// <summary> 取得總會員人數 </summary>
         public static DataRow GetUserCount()
         {
             string connectionString = DBHealper.GetConnectionString();
@@ -117,7 +120,7 @@ namespace AccountingNote.DBSource
                 return null;
             }
         }
-
+        /// <summary> 取得總會員資訊(Account) </summary>
         public static DataRow GetUserByAccount(string account)
         {
             string connectionString = DBHealper.GetConnectionString();
@@ -143,7 +146,7 @@ namespace AccountingNote.DBSource
                 return null;
             }
         }
-
+        /// <summary> 取得總會員資訊(ID) </summary>
         public static DataRow GetUserInfoByUserId(string user_id)
         {
             string connectionString = DBHealper.GetConnectionString();
@@ -168,7 +171,7 @@ namespace AccountingNote.DBSource
                 return null;
             }
         }
-
+        /// <summary> 取得全部會員資訊(UserList) </summary>
         public static DataTable GetUserList()
         {
             string connectionString = DBHealper.GetConnectionString();
@@ -193,7 +196,7 @@ namespace AccountingNote.DBSource
                 return null;
             }
         }
-
+        /// <summary> 取得會員密碼 </summary>
         public static DataRow GetUserPassword(string user_id)
         {
             string connectionString = DBHealper.GetConnectionString();
@@ -215,7 +218,7 @@ namespace AccountingNote.DBSource
                 return null;
             }
         }
-
+        /// <summary> 更新會員密碼 </summary>
         public static bool UpdateUserPwd(string user_id, string user_password)
         {
             string connectionString = DBHealper.GetConnectionString();

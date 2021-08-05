@@ -34,13 +34,13 @@ namespace AccountingNote.SystemAdmin
             {
                 if (this.Request.QueryString["UID"] == null)
                 {
-                    // 移除帳號 Label 
+                    // 移除帳號 Label  改顯示帳號 TextBox
                     this.pnlAccount.Controls.Remove(this.lblUserAccount);
                     this.pnlAccount.Controls.Add(this.txtUserAccount);
                 }
                 else
                 {
-                    // 移除帳號 TextBox 
+                    // 移除帳號 TextBox 改顯示帳號 帳號 Label
                     this.pnlAccount.Controls.Remove(this.txtUserAccount);
                     this.pnlAccount.Controls.Add(this.lblUserAccount);
                 }
@@ -78,7 +78,7 @@ namespace AccountingNote.SystemAdmin
                         this.btnDelete.Enabled = false;
                         this.btnChangePwd.Enabled = false;
                     }
-
+                    // 取得使用者資訊
                     var drUserInfo = UserInfoManager.GetUserInfoByUserId(userIdTxt);
                     if (drUserInfo == null)
                     {
@@ -169,7 +169,7 @@ namespace AccountingNote.SystemAdmin
         {
             if (string.IsNullOrEmpty(this.Request.QueryString["UID"]))
                 return;
-
+            // 提示訊息
             var alertSuccess = MessageBox.Show("若刪除帳號，流水帳資料也會一併刪除！ 確定要刪除嗎？", "警告提示",
                                          MessageBoxButtons.YesNo,
                                          MessageBoxIcon.Warning);
@@ -177,7 +177,7 @@ namespace AccountingNote.SystemAdmin
             {
                 if (UserInfoManager.DeleteUserInfo(this.Request.QueryString["UID"]))
                 {
-                    // 抓取使用者在AccountingNote 筆數
+                    // 抓取使用者在AccountingNote 筆數，如為0則直接跳轉頁面，不然則進行刪除流水帳資訊的動作
                     var dt = AccountingManager.GetAccountingList(this.Request.QueryString["UID"]);
                     if(dt.Rows.Count == 0)
                     {
@@ -204,7 +204,7 @@ namespace AccountingNote.SystemAdmin
         {
             Response.Redirect($"/SystemAdmin/UserPassword.aspx?UID={this.Request.QueryString["UID"]}");
         }
-
+        /// <summary>確認檢核Input內容 </summary>
         private bool CheckInput(out List<string> errMsgList)
         {
             List<string> msgList = new List<string>();

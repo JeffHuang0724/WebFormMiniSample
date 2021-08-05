@@ -92,7 +92,7 @@ namespace AccountingNote.SystemAdmin
 
         }
 
-        //20210802
+       /// <summary>取得當前GridView頁數/ </summary>
         private int GetCurrentPage()
         {
             string pageText = Request.QueryString["Page"];
@@ -109,7 +109,7 @@ namespace AccountingNote.SystemAdmin
 
             return intPage;
         }
-
+        /// <summary>取得GridView 內容/ </summary>
         private DataTable GetPageDataTable (DataTable dt)
         {
             DataTable dtPaged = dt.Clone();
@@ -133,7 +133,6 @@ namespace AccountingNote.SystemAdmin
             }
             return dtPaged;
         }
-        //20210802
 
         protected void btnCreate_Click(object sender, EventArgs e)
         {

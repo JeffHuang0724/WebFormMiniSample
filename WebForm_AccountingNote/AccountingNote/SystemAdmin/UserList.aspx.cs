@@ -20,7 +20,7 @@ namespace AccountingNote.SystemAdmin
                 Response.Redirect("/Login.aspx");
                 return;
             }
-
+    
             var currentUser = AuthManager.GetCurentUser();
             if (currentUser == null)
             {
@@ -29,7 +29,7 @@ namespace AccountingNote.SystemAdmin
                 return;
             }
 
-            // read user data
+            // 取得使用者列表，如為空則隱藏列表並顯示訊息
             var dt = UserInfoManager.GetUserList();
             if (dt.Rows.Count > 0)
             {
@@ -48,7 +48,7 @@ namespace AccountingNote.SystemAdmin
                 this.plcNoData.Visible = true;
             }
         }
-
+        /// <summary>取得當前頁數 </summary>
         private int GetCurrentPage()
         {
             string pageText = Request.QueryString["page"];
@@ -65,7 +65,7 @@ namespace AccountingNote.SystemAdmin
 
             return intPage;
         }
-
+        /// <summary> 取得分頁的資料列表  </summary>
         private DataTable GetPageDataTable(DataTable dt)
         {
             DataTable dtPaged = dt.Clone();

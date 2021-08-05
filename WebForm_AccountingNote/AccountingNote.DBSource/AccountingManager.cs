@@ -11,6 +11,7 @@ namespace AccountingNote.DBSource
 {
     public class AccountingManager
     {
+        /// <summary> 新增流水帳 </summary>
         public static void CreateAccountingList(string user_id, string caption, int amount, int act_type, string description)
         {
             // <<<<< check input >>>>>
@@ -56,6 +57,7 @@ namespace AccountingNote.DBSource
                 Logger.WriteLog(ex);
             }
         }
+        /// <summary> 更新流水帳 </summary>
         public static bool UpdateAccountingList(int list_id, string user_id, string caption, int amount, int act_type, string description)
         {
             // <<<<< check input >>>>>
@@ -98,6 +100,7 @@ namespace AccountingNote.DBSource
                 return false;
             }
         }
+        /// <summary> 刪除流水帳(單筆) </summary>
         public static bool DeleteAccountingByListId(string list_id)
         {
             string connectionString = DBHealper.GetConnectionString();
@@ -117,6 +120,7 @@ namespace AccountingNote.DBSource
                 return false;
             }
         }
+        /// <summary> 刪除流水帳(多筆 By UserID) </summary>
         public static bool DeleteAccountingByUserId(string user_id)
         {
             string connectionString = DBHealper.GetConnectionString();
@@ -136,6 +140,7 @@ namespace AccountingNote.DBSource
                 return false;
             }
         }
+        /// <summary> 取得個人流水帳列表 </summary>
         public static DataTable GetAccountingList(string userId)
         {
             string connectionString = DBHealper.GetConnectionString();
@@ -162,6 +167,7 @@ namespace AccountingNote.DBSource
                 return null;
             }
         }
+        /// <summary> 取得個人流水帳詳細資訊 </summary>
         public static DataRow GetAccountingByListId(int list_id, string user_id)
         {
             string connectionString = DBHealper.GetConnectionString();
@@ -188,6 +194,7 @@ namespace AccountingNote.DBSource
                 return null;
             }
         }
+        /// <summary> 取得流水帳最新最舊的時間 </summary>
         public static DataRow GetAccountingDefaultInfo()
         {
             string connectionString = DBHealper.GetConnectionString();
@@ -206,6 +213,7 @@ namespace AccountingNote.DBSource
                 return null;
             }
         }
+        /// <summary> 取得個人流水帳收入總和 </summary>
         public static DataRow GetAccountingAddAmount(string userId)
         {
             string connectionString = DBHealper.GetConnectionString();
@@ -227,6 +235,7 @@ namespace AccountingNote.DBSource
                 return null;
             }
         }
+        /// <summary> 取得個人流水帳支出總和 </summary>
         public static DataRow GetAccountingMinusAmount(string userId)
         {
             string connectionString = DBHealper.GetConnectionString();

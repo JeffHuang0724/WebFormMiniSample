@@ -41,13 +41,13 @@ namespace AccountingNote.SystemAdmin
                     string userIdTxt = this.Request.QueryString["UID"];
 
 
-                    //確認登入者是否為本人或是管理員
-                    if (string.Compare(currentUser.user_id, userIdTxt) != 0 && string.Compare(currentUser.user_level, "0") != 0)
+                    //確認登入者是否為本人
+                    if (string.Compare(currentUser.user_id, userIdTxt) != 0)
                     {
                         Response.Redirect("/SystemAdmin/UserList.aspx");
                     }
 
-
+                    // 取得會員帳號，並顯示
                     var drUserInfo = UserInfoManager.GetUserInfoByUserId(userIdTxt);
                     if (drUserInfo == null)
                     {
@@ -65,6 +65,7 @@ namespace AccountingNote.SystemAdmin
 
         protected void btnSave_Click(object sender, EventArgs e)
         {
+            // 訊息提示
             var alert1 = MessageBox.Show("你確定要變更密碼?", "訊息提示",
                                          MessageBoxButtons.YesNo,
                                          MessageBoxIcon.Warning);
@@ -73,6 +74,7 @@ namespace AccountingNote.SystemAdmin
                 return;
             }
 
+            // 新增List、確認輸入內容，並將錯誤訊息顯示
             List<string> msgList = new List<string>();
             if (!this.CheckInput(out msgList))
             {
@@ -80,6 +82,7 @@ namespace AccountingNote.SystemAdmin
                 return;
             }
 
+            // 確認是否為本人
             UserInfoModel currentUser = AuthManager.GetCurentUser();
             if (currentUser == null)
             {
@@ -87,6 +90,7 @@ namespace AccountingNote.SystemAdmin
                 return;
             }
 
+            // 取得會員ID ，藉以更新密碼，並將訊息提示給使用者
             string userIdTxt = this.Request.QueryString["UID"];
             if (UserInfoManager.UpdateUserPwd(userIdTxt, this.txtNewPwd.Text))
             {
@@ -109,10 +113,11 @@ namespace AccountingNote.SystemAdmin
                 }
             }
         }
-
+        /// <summary>確認檢核Input 內容，回傳布林值以及錯誤訊息</summary>
         private bool CheckInput(out List<string> errMsgList)
         {
             List<string> msgList = new List<string>();
+            //確認欄位是否為空
             if (string.IsNullOrWhiteSpace(txtOldPwd.Text) || string.IsNullOrWhiteSpace(txtOldCommitPwd.Text) || string.IsNullOrWhiteSpace(txtNewPwd.Text))
             {
                 msgList.Add("密碼不得為空，請重新確認");
